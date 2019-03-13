@@ -10,11 +10,18 @@
 		5616598222385E8C005E9D0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616598122385E8C005E9D0C /* AppDelegate.swift */; };
 		5616598422385E8C005E9D0C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616598322385E8C005E9D0C /* ViewController.swift */; };
 		5616598722385E8C005E9D0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5616598522385E8C005E9D0C /* Main.storyboard */; };
-		5616598A22385E8C005E9D0C /* TimeRecorder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5616598822385E8C005E9D0C /* TimeRecorder.xcdatamodeld */; };
 		5616598C22385E8E005E9D0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5616598B22385E8E005E9D0C /* Assets.xcassets */; };
 		5616598F22385E8E005E9D0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5616598D22385E8E005E9D0C /* LaunchScreen.storyboard */; };
 		5616599A22385E8E005E9D0C /* TimeRecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616599922385E8E005E9D0C /* TimeRecorderTests.swift */; };
 		561659A522385E8E005E9D0C /* TimeRecorderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561659A422385E8E005E9D0C /* TimeRecorderUITests.swift */; };
+		5682D2B022387E6D00B2B96F /* DatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */; };
+		5682D2B32238866700B2B96F /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B12238866600B2B96F /* Realm.framework */; };
+		5682D2B42238866700B2B96F /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B12238866600B2B96F /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5682D2B52238866700B2B96F /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B22238866700B2B96F /* RealmSwift.framework */; };
+		5682D2B62238866700B2B96F /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B22238866700B2B96F /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5682D2BA223886B400B2B96F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B9223886B400B2B96F /* libz.tbd */; };
+		5682D2BC223886BF00B2B96F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2BB223886BF00B2B96F /* libc++.tbd */; };
+		56D7E2242238895A005109A9 /* RealmObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7E2232238895A005109A9 /* RealmObjects.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,12 +41,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5682D2B72238866700B2B96F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5682D2B62238866700B2B96F /* RealmSwift.framework in Embed Frameworks */,
+				5682D2B42238866700B2B96F /* Realm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5616597E22385E8C005E9D0C /* TimeRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5616598122385E8C005E9D0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5616598322385E8C005E9D0C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5616598622385E8C005E9D0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5616598922385E8C005E9D0C /* TimeRecorder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimeRecorder.xcdatamodel; sourceTree = "<group>"; };
 		5616598B22385E8E005E9D0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5616598E22385E8E005E9D0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5616599022385E8E005E9D0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +70,12 @@
 		561659A022385E8E005E9D0C /* TimeRecorderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeRecorderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		561659A422385E8E005E9D0C /* TimeRecorderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRecorderUITests.swift; sourceTree = "<group>"; };
 		561659A622385E8E005E9D0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseModel.swift; sourceTree = "<group>"; };
+		5682D2B12238866600B2B96F /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		5682D2B22238866700B2B96F /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		5682D2B9223886B400B2B96F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		5682D2BB223886BF00B2B96F /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		56D7E2232238895A005109A9 /* RealmObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmObjects.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +83,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5682D2BC223886BF00B2B96F /* libc++.tbd in Frameworks */,
+				5682D2BA223886B400B2B96F /* libz.tbd in Frameworks */,
+				5682D2B52238866700B2B96F /* RealmSwift.framework in Frameworks */,
+				5682D2B32238866700B2B96F /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,10 +110,13 @@
 		5616597522385E8C005E9D0C = {
 			isa = PBXGroup;
 			children = (
+				5682D2B12238866600B2B96F /* Realm.framework */,
+				5682D2B22238866700B2B96F /* RealmSwift.framework */,
 				5616598022385E8C005E9D0C /* TimeRecorder */,
 				5616599822385E8E005E9D0C /* TimeRecorderTests */,
 				561659A322385E8E005E9D0C /* TimeRecorderUITests */,
 				5616597F22385E8C005E9D0C /* Products */,
+				5682D2B8223886B400B2B96F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,13 +133,13 @@
 		5616598022385E8C005E9D0C /* TimeRecorder */ = {
 			isa = PBXGroup;
 			children = (
+				5682D2AE22387E0B00B2B96F /* Models */,
 				5616598122385E8C005E9D0C /* AppDelegate.swift */,
 				5616598322385E8C005E9D0C /* ViewController.swift */,
 				5616598522385E8C005E9D0C /* Main.storyboard */,
 				5616598B22385E8E005E9D0C /* Assets.xcassets */,
 				5616598D22385E8E005E9D0C /* LaunchScreen.storyboard */,
 				5616599022385E8E005E9D0C /* Info.plist */,
-				5616598822385E8C005E9D0C /* TimeRecorder.xcdatamodeld */,
 			);
 			path = TimeRecorder;
 			sourceTree = "<group>";
@@ -128,6 +162,24 @@
 			path = TimeRecorderUITests;
 			sourceTree = "<group>";
 		};
+		5682D2AE22387E0B00B2B96F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */,
+				56D7E2232238895A005109A9 /* RealmObjects.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5682D2B8223886B400B2B96F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5682D2BB223886BF00B2B96F /* libc++.tbd */,
+				5682D2B9223886B400B2B96F /* libz.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,6 +190,7 @@
 				5616597A22385E8C005E9D0C /* Sources */,
 				5616597B22385E8C005E9D0C /* Frameworks */,
 				5616597C22385E8C005E9D0C /* Resources */,
+				5682D2B72238866700B2B96F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -259,8 +312,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5682D2B022387E6D00B2B96F /* DatabaseModel.swift in Sources */,
+				56D7E2242238895A005109A9 /* RealmObjects.swift in Sources */,
 				5616598422385E8C005E9D0C /* ViewController.swift in Sources */,
-				5616598A22385E8C005E9D0C /* TimeRecorder.xcdatamodeld in Sources */,
 				5616598222385E8C005E9D0C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,6 +492,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3ALGDS99C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = TimeRecorder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -456,6 +514,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3ALGDS99C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = TimeRecorder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -590,19 +652,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		5616598822385E8C005E9D0C /* TimeRecorder.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				5616598922385E8C005E9D0C /* TimeRecorder.xcdatamodel */,
-			);
-			currentVersion = 5616598922385E8C005E9D0C /* TimeRecorder.xcdatamodel */;
-			path = TimeRecorder.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 5616597622385E8C005E9D0C /* Project object */;
 }
