@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		5616598222385E8C005E9D0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616598122385E8C005E9D0C /* AppDelegate.swift */; };
-		5616598422385E8C005E9D0C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616598322385E8C005E9D0C /* ViewController.swift */; };
-		5616598722385E8C005E9D0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5616598522385E8C005E9D0C /* Main.storyboard */; };
 		5616598C22385E8E005E9D0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5616598B22385E8E005E9D0C /* Assets.xcassets */; };
 		5616598F22385E8E005E9D0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5616598D22385E8E005E9D0C /* LaunchScreen.storyboard */; };
 		5616599A22385E8E005E9D0C /* TimeRecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616599922385E8E005E9D0C /* TimeRecorderTests.swift */; };
 		561659A522385E8E005E9D0C /* TimeRecorderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561659A422385E8E005E9D0C /* TimeRecorderUITests.swift */; };
+		5667FC412238FA09002617BE /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FC402238FA09002617BE /* SettingViewController.swift */; };
+		5667FC432238FA43002617BE /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FC422238FA43002617BE /* ChatsViewController.swift */; };
+		5667FC452238FA54002617BE /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FC442238FA54002617BE /* RecordsViewController.swift */; };
+		5667FC472238FA7D002617BE /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FC462238FA7D002617BE /* TimerViewController.swift */; };
+		5667FC492239A108002617BE /* GroupEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FC482239A108002617BE /* GroupEditViewController.swift */; };
 		5682D2B022387E6D00B2B96F /* DatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */; };
 		5682D2B32238866700B2B96F /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B12238866600B2B96F /* Realm.framework */; };
 		5682D2B42238866700B2B96F /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B12238866600B2B96F /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -59,8 +62,6 @@
 /* Begin PBXFileReference section */
 		5616597E22385E8C005E9D0C /* TimeRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5616598122385E8C005E9D0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5616598322385E8C005E9D0C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		5616598622385E8C005E9D0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5616598B22385E8E005E9D0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5616598E22385E8E005E9D0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5616599022385E8E005E9D0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,6 +71,11 @@
 		561659A022385E8E005E9D0C /* TimeRecorderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeRecorderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		561659A422385E8E005E9D0C /* TimeRecorderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRecorderUITests.swift; sourceTree = "<group>"; };
 		561659A622385E8E005E9D0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5667FC402238FA09002617BE /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		5667FC422238FA43002617BE /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
+		5667FC442238FA54002617BE /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
+		5667FC462238FA7D002617BE /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		5667FC482239A108002617BE /* GroupEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupEditViewController.swift; sourceTree = "<group>"; };
 		5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseModel.swift; sourceTree = "<group>"; };
 		5682D2B12238866600B2B96F /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		5682D2B22238866700B2B96F /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
@@ -133,10 +139,9 @@
 		5616598022385E8C005E9D0C /* TimeRecorder */ = {
 			isa = PBXGroup;
 			children = (
+				5667FC3B2238F91C002617BE /* Modules */,
 				5682D2AE22387E0B00B2B96F /* Models */,
 				5616598122385E8C005E9D0C /* AppDelegate.swift */,
-				5616598322385E8C005E9D0C /* ViewController.swift */,
-				5616598522385E8C005E9D0C /* Main.storyboard */,
 				5616598B22385E8E005E9D0C /* Assets.xcassets */,
 				5616598D22385E8E005E9D0C /* LaunchScreen.storyboard */,
 				5616599022385E8E005E9D0C /* Info.plist */,
@@ -160,6 +165,50 @@
 				561659A622385E8E005E9D0C /* Info.plist */,
 			);
 			path = TimeRecorderUITests;
+			sourceTree = "<group>";
+		};
+		5667FC3B2238F91C002617BE /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				5667FC3F2238F980002617BE /* Setting */,
+				5667FC3E2238F96D002617BE /* Chats */,
+				5667FC3D2238F963002617BE /* Records */,
+				5667FC3C2238F94F002617BE /* Timer */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		5667FC3C2238F94F002617BE /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				5667FC462238FA7D002617BE /* TimerViewController.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		5667FC3D2238F963002617BE /* Records */ = {
+			isa = PBXGroup;
+			children = (
+				5667FC442238FA54002617BE /* RecordsViewController.swift */,
+			);
+			path = Records;
+			sourceTree = "<group>";
+		};
+		5667FC3E2238F96D002617BE /* Chats */ = {
+			isa = PBXGroup;
+			children = (
+				5667FC422238FA43002617BE /* ChatsViewController.swift */,
+			);
+			path = Chats;
+			sourceTree = "<group>";
+		};
+		5667FC3F2238F980002617BE /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				5667FC402238FA09002617BE /* SettingViewController.swift */,
+				5667FC482239A108002617BE /* GroupEditViewController.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		5682D2AE22387E0B00B2B96F /* Models */ = {
@@ -287,7 +336,6 @@
 			files = (
 				5616598F22385E8E005E9D0C /* LaunchScreen.storyboard in Resources */,
 				5616598C22385E8E005E9D0C /* Assets.xcassets in Resources */,
-				5616598722385E8C005E9D0C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,9 +360,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5667FC412238FA09002617BE /* SettingViewController.swift in Sources */,
+				5667FC452238FA54002617BE /* RecordsViewController.swift in Sources */,
+				5667FC492239A108002617BE /* GroupEditViewController.swift in Sources */,
 				5682D2B022387E6D00B2B96F /* DatabaseModel.swift in Sources */,
 				56D7E2242238895A005109A9 /* RealmObjects.swift in Sources */,
-				5616598422385E8C005E9D0C /* ViewController.swift in Sources */,
+				5667FC472238FA7D002617BE /* TimerViewController.swift in Sources */,
+				5667FC432238FA43002617BE /* ChatsViewController.swift in Sources */,
 				5616598222385E8C005E9D0C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,14 +403,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		5616598522385E8C005E9D0C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5616598622385E8C005E9D0C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5616598D22385E8E005E9D0C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
