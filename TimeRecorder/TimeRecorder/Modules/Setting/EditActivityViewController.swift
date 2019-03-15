@@ -1,30 +1,36 @@
 //
-//  SettingViewController.swift
+//  EditItemViewController.swift
 //  TimeRecorder
 //
-//  Created by Leo Zhou on 2019/3/13.
+//  Created by Leo Zhou on 2019/3/14.
 //  Copyright © 2019 LeoZhou. All rights reserved.
 //
 
 import UIKit
 
-class SettingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
 
-    // Setting page items, currently only one option: edit Categories
-    static let titleLabel = "Setting"
-    var info = [["Categories"]] // Category
+
+class EditActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    var info = ["name", "icon"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.view.backgroundColor = UIColor.white
         
-        self.title = SettingViewController.titleLabel
-        self.navigationController!.navigationBar.isTranslucent = false
+        let rightButton = UIBarButtonItem(
+            title: "Done",
+            style:.done ,
+            target:self ,
+            action: #selector(EditActivityViewController.done))
+        self.navigationItem.rightBarButtonItem = rightButton
         
         let backButton = UIBarButtonItem(
             title: self.title,
             style: .plain,
             target: self,
-            action: #selector(SettingViewController.back))
+            action: #selector(EditActivityViewController.back))
         self.navigationItem.backBarButtonItem = backButton
         
         let screenSize = UIScreen.main.bounds.size
@@ -40,11 +46,16 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.allowsMultipleSelection = false
         self.view.addSubview(tableView)
     }
+    
     @objc func back() {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @objc func done() {
+        
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return info[section].count
+        return info.count
     }
     
     // get cell info
@@ -52,40 +63,26 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as UITableViewCell
         cell.accessoryType = .disclosureIndicator
         if let label = cell.textLabel {
-            label.text = "\(info[indexPath.section][indexPath.row])"
+            label.text = "\(info[indexPath.row])"
         }
         return cell
     }
     
-    /*func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let name = info[indexPath.section][indexPath.row]
-            print("delete \(name)")
-        }
-    }*/
-    
     // action when selected cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let name = info[indexPath.section][indexPath.row]
-        switch name {
-        case "Categories":
-            let vc = CategoriesViewController()
-            vc.title = name
-            self.navigationController?.pushViewController(vc, animated: true)
-        default:
-            print("Not supportted.")
-        }
+        let name = info[indexPath.row]
+        print("selected \(name)")
     }
     
     /*func tableView(_ tableView: UITableView, accessoryButtonTapped indexPath: IndexPath) {
-        let name = info[indexPath.section][indexPath.row]
-        print("selected \(name)")
-        self.present(GroupEditViewController(), animated: true, completion: nil)
-    }*/
+     let name = info[indexPath.section][indexPath.row]
+     print("selected \(name)")
+     self.present(GroupEditViewController(), animated: true, completion: nil)
+     }*/
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return info.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

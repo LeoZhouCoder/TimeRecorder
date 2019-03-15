@@ -1,25 +1,19 @@
 //
-//  GroupEditViewController.swift
+//  SelectIconViewController.swift
 //  TimeRecorder
 //
-//  Created by Leo Zhou on 2019/3/14.
+//  Created by Leo Zhou on 2019/3/15.
 //  Copyright © 2019 LeoZhou. All rights reserved.
 //
 
 import UIKit
 
-class GroupEditViewController: UIViewController {
+class SelectIconViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
-        
-        self.title = "Setting"
-        // self.navigationBar.barTintColor = UIColor.darkGray
-        // self.navigationBar.isTranslucent = false
-        
-        
     }
     
 
