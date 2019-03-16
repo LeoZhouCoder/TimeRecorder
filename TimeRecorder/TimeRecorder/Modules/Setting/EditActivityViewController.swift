@@ -72,7 +72,13 @@ class EditActivityViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let name = info[indexPath.row]
-        print("selected \(name)")
+        switch name {
+        case info[1]:
+            self.navigationController?.pushViewController(SelectIconViewController(), animated: true)
+        default:
+            print("selected \(name)")
+        }
+        
     }
     
     /*func tableView(_ tableView: UITableView, accessoryButtonTapped indexPath: IndexPath) {

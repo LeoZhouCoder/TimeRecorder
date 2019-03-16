@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 enum IconType: Int {
-    case system,coutomize
+    case system, coutomize, deleted
 }
 
 class DatabaseModel: NSObject {
@@ -48,6 +48,7 @@ class DatabaseModel: NSObject {
             }
             try! realm.write {
                 icon.name = iconImages[0]
+                icon.type = IconType.deleted.rawValue
             }
         }
         var newSystemIcons: [Icon] = []
@@ -66,6 +67,10 @@ class DatabaseModel: NSObject {
                 realm.add(icon)
             }
         }
+    }
+    
+    static func getAllIcons() -> Results<Icon> {
+        return realm.objects(Icon.self).filter("type != \(IconType.deleted.rawValue) ").sorted(byKeyPath: "type")
     }
     
     static func addIcon(imageData: Data) -> Bool {
@@ -97,7 +102,7 @@ class DatabaseModel: NSObject {
         return true
     }
     
-    static func getAllActivityCategory() -> Results<ActivityCategory>? {
+    static func getAllActivityCategory() -> Results<ActivityCategory> {
         // statusItems = realm.objects(Status).filter("StatusID  > 111 ")
         // statusItems = self.realm.objects(Status).filter("StatusID > 111 ").filter("text = '这是第二条test'")
         // statusItems = self.realm.objects(Status).filter("StatusID > 111").sorted("StatusID")
