@@ -15,6 +15,11 @@ protocol EditActivityNameProtocol {
 class EditActivityNameTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     var delegate: EditActivityNameProtocol?
+    var name: String? {
+        didSet {
+            nameText.text = name
+        }
+    }
     
     var nameText: UITextField = {
         var textField = UITextField()

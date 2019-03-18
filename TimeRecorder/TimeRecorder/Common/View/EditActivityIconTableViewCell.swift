@@ -13,7 +13,6 @@ class EditActivityIconTableViewCell: UITableViewCell {
     var icon:Icon? {
         didSet{
             iconView.icon = icon
-            
         }
     }
     var iconView: IconView = {

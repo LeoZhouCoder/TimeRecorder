@@ -114,6 +114,7 @@ class EditActivityViewController: UIViewController, UITableViewDelegate, UITable
                 label.text = "\(attributes[indexPath.row].rawValue)"
             }
             cell.delegate = self
+            cell.name = editActivityModel!.name
             return cell
         case .icon:
             iconCellIndex = indexPath
