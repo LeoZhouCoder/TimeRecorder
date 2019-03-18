@@ -8,11 +8,42 @@
 
 import UIKit
 
+enum EditableActivityAttribute: String {
+    case name = "Name"
+    case icon = "Icon"
+}
 
+struct EditActivityModel {
+    var name: String
+    var icon: Icon
+}
 
-class EditActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+protocol EditActivityViewProtocol {
+    func didEditActivity(editActivityModel:EditActivityModel)
+}
 
-    var info = ["name", "icon"]
+class EditActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SelectIconViewProtocol, EditActivityNameProtocol {
+    
+    let attributes = [EditableActivityAttribute.name, EditableActivityAttribute.icon]
+    
+    var editActivityModel:EditActivityModel?
+    var delegate: EditActivityViewProtocol?
+    var tableView: UITableView?
+    var iconCellIndex: IndexPath?
+    
+    init(with model: EditActivityModel?, delegate: EditActivityViewProtocol?) {
+        super.init(nibName: nil, bundle: nil)
+        if model == nil {
+            self.editActivityModel = EditActivityModel(name: "", icon: DatabaseModel.getDefaultIcon())
+        }else{
+            self.editActivityModel = model
+        }
+        self.delegate = delegate
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,13 +69,26 @@ class EditActivityViewController: UIViewController, UITableViewDelegate, UITable
         let tableView = UITableView(
             frame: CGRect(x: 0, y: 0, width: screenSize.width,height: tableViewHeight),
             style: .grouped)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(EditActivityNameTableViewCell.self, forCellReuseIdentifier: "NameCell")
+        tableView.register(EditActivityIconTableViewCell.self, forCellReuseIdentifier: "IconCell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .singleLine
         tableView.allowsSelection = true
         tableView.allowsMultipleSelection = false
+        
         self.view.addSubview(tableView)
+        self.tableView = tableView
+        
+        let tap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(EditActivityViewController.hideKeyboard))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @objc func hideKeyboard(tapG:UITapGestureRecognizer){
+        self.view.endEditing(true)
     }
     
     @objc func back() {
@@ -52,43 +96,48 @@ class EditActivityViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @objc func done() {
-        
+        self.view.endEditing(true)
+        self.delegate?.didEditActivity(editActivityModel: editActivityModel!)
+        self.back()
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return info.count
+        return attributes.count
     }
     
-    // get cell info
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as UITableViewCell
-        cell.accessoryType = .disclosureIndicator
-        if let label = cell.textLabel {
-            label.text = "\(info[indexPath.row])"
+        let attribute = attributes[indexPath.row]
+        switch attribute {
+        case .name:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NameCell", for: indexPath) as! EditActivityNameTableViewCell
+            if let label = cell.textLabel {
+                label.text = "\(attributes[indexPath.row].rawValue)"
+            }
+            cell.delegate = self
+            return cell
+        case .icon:
+            iconCellIndex = indexPath
+            let cell = tableView.dequeueReusableCell(withIdentifier: "IconCell", for: indexPath) as! EditActivityIconTableViewCell
+            cell.accessoryType = .disclosureIndicator
+            if let label = cell.textLabel {
+                label.text = "\(attributes[indexPath.row].rawValue)"
+            }
+            cell.icon = editActivityModel!.icon
+            return cell
         }
-        return cell
     }
     
-    // action when selected cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let name = info[indexPath.row]
-        switch name {
-        case info[1]:
-            self.navigationController?.pushViewController(SelectIconViewController(), animated: true)
-        default:
-            print("selected \(name)")
+        let attribute = attributes[indexPath.row]
+        switch attribute {
+        case .name:
+            print("selected \(attribute)")
+        case .icon:
+            self.navigationController?.pushViewController(
+                SelectIconViewController(selectedIcon: editActivityModel!.icon, delegate: self),
+                animated: true)
         }
-        
-    }
-    
-    /*func tableView(_ tableView: UITableView, accessoryButtonTapped indexPath: IndexPath) {
-     let name = info[indexPath.section][indexPath.row]
-     print("selected \(name)")
-     self.present(GroupEditViewController(), animated: true, completion: nil)
-     }*/
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -99,15 +148,21 @@ class EditActivityViewController: UIViewController, UITableViewDelegate, UITable
         return 0
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath)-> CGFloat {
         return 50
     }
+    
+    func didSelectIcon(_ icon: Icon) {
+        editActivityModel!.icon = icon
+        self.navigationController?.popViewController(animated: true)
+        if let indexPath = iconCellIndex {
+            let cell = tableView!.cellForRow(at: indexPath) as! EditActivityIconTableViewCell
+            cell.icon = icon
+        }
+    }
+    
+    func didEndEditing(name: String) {
+        editActivityModel!.name = name
+    }
+    
 }

@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class CategoriesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CategoriesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EditActivityViewProtocol {
     
     var categories:Results<ActivityCategory>?
 
@@ -47,14 +47,13 @@ class CategoriesViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.allowsSelection = true
         tableView.allowsMultipleSelection = false
         self.view.addSubview(tableView)
-        
     }
     @objc func back() {
         self.navigationController?.popViewController(animated: true)
     }
     
     @objc func addCategory() {
-        let vc = EditActivityViewController()
+        let vc = EditActivityViewController(with: nil, delegate: self)
         vc.title = "New Category"
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -85,7 +84,6 @@ class CategoriesViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.deselectRow(at: indexPath, animated: true)
         let name = categories![indexPath.section]
         print("selected \(name)")
-        
         self.navigationController?.pushViewController(CategoriesViewController(), animated: true)
     }
     
@@ -118,5 +116,10 @@ class CategoriesViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath)-> CGFloat {
         return 50
     }
+    
+    func didEditActivity(editActivityModel: EditActivityModel) {
+        print("New Category name: \(editActivityModel.name) icon: \(editActivityModel.icon)")
+    }
+    
 
 }

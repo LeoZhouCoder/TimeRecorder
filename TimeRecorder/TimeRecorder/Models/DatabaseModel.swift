@@ -69,6 +69,10 @@ class DatabaseModel: NSObject {
         }
     }
     
+    static func getDefaultIcon() -> Icon {
+        return getAllIcons()[0]
+    }
+    
     static func getAllIcons() -> Results<Icon> {
         return realm.objects(Icon.self).filter("type != \(IconType.deleted.rawValue) ").sorted(byKeyPath: "type")
     }
