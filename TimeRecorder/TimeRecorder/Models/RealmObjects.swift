@@ -10,24 +10,40 @@ import Foundation
 import RealmSwift
 
 class Icon: Object {
+    @objc dynamic var id = UUID().uuidString
     @objc dynamic var type = 0
     @objc dynamic var name = ""
     @objc dynamic var image = Data()
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
 }
 
 class ActivityCategory: Object {
+    @objc dynamic var id = UUID().uuidString
     @objc dynamic var name = ""
     @objc dynamic var icon: Icon?
     
     let activities = List<Activity>()
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
 }
 
 class Activity: Object {
+    @objc dynamic var id = UUID().uuidString
     @objc dynamic var name = ""
     @objc dynamic var icon: Icon?
     @objc dynamic var category: ActivityCategory?
     
     let records = List<ActivityRecord>()
+    
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
 }
 
 class ActivityRecord: Object {

@@ -66,7 +66,7 @@ class CategoriesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     @objc func addCategory() {
-        let vc = EditActivityViewController(with: nil, delegate: self)
+        let vc = EditActivityViewController(with: EditActivityModel.getNewActivityModel(), delegate: self)
         vc.title = "New Category"
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -91,6 +91,12 @@ class CategoriesViewController: UIViewController, UITableViewDelegate, UITableVi
             if let indexPath = self.tableView!.indexPathForRow(at: touchPoint) {
                 let category = categories![indexPath.section]
                 print("longPress: \(category.name)")
+                let vc = EditActivityViewController(
+                    with: EditActivityModel.getEditActivityModel(from: category as Object, name: category.name, icon: category.icon!),
+                    delegate: self)
+                vc.title = "Edit Category"
+                self.navigationController?.pushViewController(vc, animated: true)
+                
             }
         }
     }
@@ -141,10 +147,20 @@ class CategoriesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func didEditActivity(editActivityModel: EditActivityModel) {
         print("New Category name: \(editActivityModel.name) icon: \(editActivityModel.icon)")
-        let result = DatabaseModel.addActivityCategory(editActivityModel.name, editActivityModel.icon)
-        if result {
-            self.tableView?.reloadData()
+        switch editActivityModel.type {
+        case EditableActivityType.edit:
+            let category = editActivityModel.object as! ActivityCategory
+            let result = DatabaseModel.updateActivityCategory(category, editActivityModel.name, editActivityModel.icon)
+            if !result {
+                fatalError("updateActivityCategory error")
+            }
+        case EditableActivityType.new:
+            let result = DatabaseModel.addActivityCategory(editActivityModel.name, editActivityModel.icon)
+            if !result {
+                fatalError("addActivityCategory error")
+            }
         }
+        self.tableView?.reloadData()
     }
     
 

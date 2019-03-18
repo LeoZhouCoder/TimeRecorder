@@ -7,15 +7,40 @@
 //
 
 import UIKit
+import RealmSwift
 
 enum EditableActivityAttribute: String {
     case name = "Name"
     case icon = "Icon"
 }
 
+enum EditableActivityType {
+    case new, edit
+}
+
 struct EditActivityModel {
     var name: String
     var icon: Icon
+    var type: EditableActivityType
+    var object: Object?
+    
+    static func getNewActivityModel() -> EditActivityModel
+    {
+        let model = EditActivityModel(name: "",
+                                      icon: DatabaseModel.getDefaultIcon(),
+                                      type: EditableActivityType.new,
+                                      object: nil)
+        return model
+    }
+    
+    static func getEditActivityModel(from object:Object, name:String, icon:Icon) -> EditActivityModel
+    {
+        let model = EditActivityModel(name: name,
+                                      icon: icon,
+                                      type: EditableActivityType.edit,
+                                      object: object)
+        return model
+    }
 }
 
 protocol EditActivityViewProtocol {
@@ -26,18 +51,14 @@ class EditActivityViewController: UIViewController, UITableViewDelegate, UITable
     
     let attributes = [EditableActivityAttribute.name, EditableActivityAttribute.icon]
     
-    var editActivityModel:EditActivityModel?
+    var editActivityModel:EditActivityModel
     var delegate: EditActivityViewProtocol?
     var tableView: UITableView?
     var iconCellIndex: IndexPath?
     
-    init(with model: EditActivityModel?, delegate: EditActivityViewProtocol?) {
+    init(with model: EditActivityModel, delegate: EditActivityViewProtocol?) {
+        self.editActivityModel = model
         super.init(nibName: nil, bundle: nil)
-        if model == nil {
-            self.editActivityModel = EditActivityModel(name: "", icon: DatabaseModel.getDefaultIcon())
-        }else{
-            self.editActivityModel = model
-        }
         self.delegate = delegate
     }
     
@@ -97,7 +118,7 @@ class EditActivityViewController: UIViewController, UITableViewDelegate, UITable
     
     @objc func done() {
         self.view.endEditing(true)
-        self.delegate?.didEditActivity(editActivityModel: editActivityModel!)
+        self.delegate?.didEditActivity(editActivityModel: editActivityModel)
         self.back()
     }
     
@@ -114,7 +135,7 @@ class EditActivityViewController: UIViewController, UITableViewDelegate, UITable
                 label.text = "\(attributes[indexPath.row].rawValue)"
             }
             cell.delegate = self
-            cell.name = editActivityModel!.name
+            cell.name = editActivityModel.name
             return cell
         case .icon:
             iconCellIndex = indexPath
@@ -123,7 +144,7 @@ class EditActivityViewController: UIViewController, UITableViewDelegate, UITable
             if let label = cell.textLabel {
                 label.text = "\(attributes[indexPath.row].rawValue)"
             }
-            cell.icon = editActivityModel!.icon
+            cell.icon = editActivityModel.icon
             return cell
         }
     }
@@ -136,7 +157,7 @@ class EditActivityViewController: UIViewController, UITableViewDelegate, UITable
             print("selected \(attribute)")
         case .icon:
             self.navigationController?.pushViewController(
-                SelectIconViewController(selectedIcon: editActivityModel!.icon, delegate: self),
+                SelectIconViewController(selectedIcon: editActivityModel.icon, delegate: self),
                 animated: true)
         }
     }
@@ -154,7 +175,7 @@ class EditActivityViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func didSelectIcon(_ icon: Icon) {
-        editActivityModel!.icon = icon
+        editActivityModel.icon = icon
         self.navigationController?.popViewController(animated: true)
         if let indexPath = iconCellIndex {
             let cell = tableView!.cellForRow(at: indexPath) as! EditActivityIconTableViewCell
@@ -163,7 +184,7 @@ class EditActivityViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func didEndEditing(name: String) {
-        editActivityModel!.name = name
+        editActivityModel.name = name
     }
     
 }

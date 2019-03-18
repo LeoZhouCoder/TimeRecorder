@@ -114,10 +114,9 @@ class DatabaseModel: NSObject {
     }
     
     static func updateActivityCategory(_ category:ActivityCategory, _ name:String, _ icon: Icon) ->Bool {
-        category.name = name
-        category.icon = icon
-        
         try! realm.write {
+            category.name = name
+            category.icon = icon
             realm.add(category, update: true)
         }
         return true
