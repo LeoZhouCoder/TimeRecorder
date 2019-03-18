@@ -135,30 +135,27 @@ class DatabaseModel: NSObject {
         let item = Activity();
         item.name = name
         item.icon = icon
-        item.category = category
         try! realm.write {
-            realm.add(item)
+            category.activities.append(item)
         }
         return true
     }
     
     static func updateActivity(_ item:Activity, _ name:String, _ icon: Icon, _ category:ActivityCategory) ->Bool {
-        item.name = name
-        item.icon = icon
-        item.category = category
         try! realm.write {
+            item.name = name
+            item.icon = icon
             realm.add(item, update: true)
         }
         return true
     }
     
-    static func deleteActivityItem(_ item:Activity) -> Bool {
+    static func deleteActivity(_ activity:Activity) -> Bool {
         try! realm.write {
-            realm.delete(item)
+            realm.delete(activity)
         }
         return true
     }
-    
     
     
     static func addActivityRecord(_ name:String, _ icon: Icon) -> Bool {

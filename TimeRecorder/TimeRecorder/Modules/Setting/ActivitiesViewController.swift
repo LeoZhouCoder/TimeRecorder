@@ -1,39 +1,49 @@
 //
-//  GroupEditViewController.swift
+//  ActivitiesViewController.swift
 //  TimeRecorder
 //
-//  Created by Leo Zhou on 2019/3/14.
+//  Created by Leo Zhou on 2019/3/18.
 //  Copyright © 2019 LeoZhou. All rights reserved.
 //
 
 import UIKit
 import RealmSwift
 
-class CategoriesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EditActivityViewProtocol, UIGestureRecognizerDelegate {
-    
-    var categories: Results<ActivityCategory>?
-    var tableView: UITableView?
+class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EditActivityViewProtocol, UIGestureRecognizerDelegate {
 
+    var category: ActivityCategory
+    var activities: List<Activity>?
+    var tableView: UITableView?
+    
+    init(with category: ActivityCategory) {
+        self.category = category
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.white
         
         let rightButton = UIBarButtonItem(
-         image: UIImage(named:"NavBtnAdd"),
-         style:.plain ,
-         target:self ,
-         action: #selector(CategoriesViewController.addCategory))
-         self.navigationItem.rightBarButtonItem = rightButton
+            image: UIImage(named:"NavBtnAdd"),
+            style:.plain ,
+            target:self ,
+            action: #selector(ActivitiesViewController.addActivity))
+        self.navigationItem.rightBarButtonItem = rightButton
         
         let backButton = UIBarButtonItem(
             title: self.title,
             style: .plain,
             target: self,
-            action: #selector(CategoriesViewController.back))
+            action: #selector(ActivitiesViewController.back))
         self.navigationItem.backBarButtonItem = backButton
         
-        categories = DatabaseModel.getAllActivityCategory()
+        activities = category.activities
         
         let screenSize = UIScreen.main.bounds.size
         let tableViewHeight = screenSize.height - self.tabBarController!.tabBar.frame.height
@@ -59,9 +69,9 @@ class CategoriesViewController: UIViewController, UITableViewDelegate, UITableVi
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func addCategory() {
+    @objc func addActivity() {
         let vc = EditActivityViewController(with: EditActivityModel.getNewActivityModel(), delegate: self)
-        vc.title = "New Category"
+        vc.title = "New Activity"
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -71,10 +81,9 @@ class CategoriesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ActivityTableViewCell
-        cell.accessoryType = .disclosureIndicator
-        let category = categories![indexPath.section]
-        cell.icon = category.icon
-        cell.name = category.name
+        let activity = activities![indexPath.section]
+        cell.icon = activity.icon
+        cell.name = activity.name
         return cell
     }
     
@@ -82,53 +91,31 @@ class CategoriesViewController: UIViewController, UITableViewDelegate, UITableVi
         if longPressGestureRecognizer.state == UIGestureRecognizer.State.began {
             let touchPoint = longPressGestureRecognizer.location(in: self.tableView!)
             if let indexPath = self.tableView!.indexPathForRow(at: touchPoint) {
-                let category = categories![indexPath.section]
-                print("longPress: \(category.name)")
+                let activity = activities![indexPath.section]
+                print("longPress: \(activity.name)")
                 let vc = EditActivityViewController(
-                    with: EditActivityModel.getEditActivityModel(from: category as Object, name: category.name, icon: category.icon!),
+                    with: EditActivityModel.getEditActivityModel(from: activity as Object, name: activity.name, icon: activity.icon!),
                     delegate: self)
-                vc.title = "Edit Category"
+                vc.title = "Edit Activity"
                 self.navigationController?.pushViewController(vc, animated: true)
-                
             }
         }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let category = categories![indexPath.section]
-            print("delete \(category.name)")
-            if category.activities.count != 0 {
-                
-                let alertController = UIAlertController(
-                    title: "提示",
-                    message: "该分类中还有其他项目，请先删除项目然后删除分类",
-                    preferredStyle: .alert)
-                
-                let okAction = UIAlertAction(title: "确认", style: .default)
-                alertController.addAction(okAction)
-                self.present(alertController,animated: true)
-                
-            }else{
-                let result = DatabaseModel.deleteActivityCategory(category)
-                if !result {
-                    fatalError("delete ActivityCategory error")
-                }
-                self.tableView?.reloadData()
+            let activity = activities![indexPath.section]
+            print("delete \(activity.name)")
+            let result = DatabaseModel.deleteActivity(activity)
+            if !result {
+                fatalError("delete Activity error")
             }
+            self.tableView?.reloadData()
         }
-     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let category = categories![indexPath.section]
-        print("selected \(category.name)")
-        let vc = ActivitiesViewController(with: category)
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return categories!.count
+        return activities!.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -154,19 +141,18 @@ class CategoriesViewController: UIViewController, UITableViewDelegate, UITableVi
     func didEditActivity(editActivityModel: EditActivityModel) {
         switch editActivityModel.type {
         case EditableActivityType.edit:
-            let category = editActivityModel.object as! ActivityCategory
-            let result = DatabaseModel.updateActivityCategory(category, editActivityModel.name, editActivityModel.icon)
+            let activity = editActivityModel.object as! Activity
+            let result = DatabaseModel.updateActivity(activity, editActivityModel.name, editActivityModel.icon, category)
             if !result {
                 fatalError("updateActivityCategory error")
             }
         case EditableActivityType.new:
-            let result = DatabaseModel.addActivityCategory(editActivityModel.name, editActivityModel.icon)
+            let result = DatabaseModel.addActivity(editActivityModel.name, editActivityModel.icon, category)
             if !result {
                 fatalError("addActivityCategory error")
             }
         }
+        activities = category.activities
         self.tableView?.reloadData()
     }
-    
-
 }
