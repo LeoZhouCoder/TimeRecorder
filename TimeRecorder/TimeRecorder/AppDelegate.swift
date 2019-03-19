@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             tag: 300)
         
         // setting
-        let settingViewController = SettingViewController()
+        let settingViewController = SettingViewController(title: "Setting", showTabBar: true)
         settingViewController.tabBarItem = UITabBarItem(
             title: "Setting",
             image: UIImage(named: "TabSetting"),

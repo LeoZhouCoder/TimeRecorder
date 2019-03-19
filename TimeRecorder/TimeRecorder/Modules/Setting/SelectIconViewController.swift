@@ -66,7 +66,6 @@ class SelectIconViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! IconViewCell
         let icon = icons![indexPath.item]
         cell.icon = icons![indexPath.item]

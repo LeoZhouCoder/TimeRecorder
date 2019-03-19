@@ -9,97 +9,51 @@
 import UIKit
 import RealmSwift
 
-class CategoriesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EditActivityViewProtocol, UIGestureRecognizerDelegate {
+class CategoriesViewController: BasicItemsTableViewController, EditActivityViewProtocol {
     
     var categories: Results<ActivityCategory>?
-    var tableView: UITableView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.white
-        
-        let rightButton = UIBarButtonItem(
-         image: UIImage(named:"NavBtnAdd"),
-         style:.plain ,
-         target:self ,
-         action: #selector(CategoriesViewController.addCategory))
-         self.navigationItem.rightBarButtonItem = rightButton
-        
-        let backButton = UIBarButtonItem(
-            title: self.title,
-            style: .plain,
-            target: self,
-            action: #selector(CategoriesViewController.back))
-        self.navigationItem.backBarButtonItem = backButton
+        self.tableView!.register(ActivityTableViewCell.self, forCellReuseIdentifier: "ActivityCell")
         
         categories = DatabaseModel.getAllActivityCategory()
-        
-        let screenSize = UIScreen.main.bounds.size
-        let tableViewHeight = screenSize.height - self.tabBarController!.tabBar.frame.height
-        let tableView = UITableView(
-            frame: CGRect(x: 0, y: 0, width: screenSize.width,height: tableViewHeight),
-            style: .grouped)
-        tableView.register(ActivityTableViewCell.self, forCellReuseIdentifier: "Cell")
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .singleLine
-        tableView.allowsSelection = true
-        tableView.allowsMultipleSelection = false
-        self.tableView = tableView
-        self.view.addSubview(tableView)
-        
-        let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(CategoriesViewController.longPress(_:)))
-        longPressGesture.minimumPressDuration = 1.0
-        longPressGesture.delegate = self
-        self.tableView!.addGestureRecognizer(longPressGesture)
     }
     
-    @objc func back() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func addCategory() {
+    override func tappedAddButton() {
         let vc = EditActivityViewController(with: EditActivityModel.getNewActivityModel(), delegate: self)
         vc.title = "New Category"
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    override func longPressRow(at indexPath: IndexPath) {
+        let category = categories![indexPath.row]
+        let vc = EditActivityViewController(
+            with: EditActivityModel.getEditActivityModel(from: category as Object, name: category.name, icon: category.icon!),
+            delegate: self)
+        vc.title = "Edit Category"
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ActivityTableViewCell
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return categories!.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityCell", for: indexPath) as! ActivityTableViewCell
         cell.accessoryType = .disclosureIndicator
-        let category = categories![indexPath.section]
+        let category = categories![indexPath.row]
         cell.icon = category.icon
         cell.name = category.name
         return cell
     }
     
-    @objc func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
-        if longPressGestureRecognizer.state == UIGestureRecognizer.State.began {
-            let touchPoint = longPressGestureRecognizer.location(in: self.tableView!)
-            if let indexPath = self.tableView!.indexPathForRow(at: touchPoint) {
-                let category = categories![indexPath.section]
-                print("longPress: \(category.name)")
-                let vc = EditActivityViewController(
-                    with: EditActivityModel.getEditActivityModel(from: category as Object, name: category.name, icon: category.icon!),
-                    delegate: self)
-                vc.title = "Edit Category"
-                self.navigationController?.pushViewController(vc, animated: true)
-                
-            }
-        }
-    }
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let category = categories![indexPath.section]
+            let category = categories![indexPath.row]
             print("delete \(category.name)")
             if category.activities.count != 0 {
-                
                 let alertController = UIAlertController(
                     title: "提示",
                     message: "该分类中还有其他项目，请先删除项目然后删除分类",
@@ -121,34 +75,9 @@ class CategoriesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let category = categories![indexPath.section]
-        print("selected \(category.name)")
-        let vc = ActivitiesViewController(with: category)
+        let category = categories![indexPath.row]
+        let vc = ActivitiesViewController(with: category, title: "Activities", showTabBar: false)
         self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return categories!.count
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return UIView()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath)-> CGFloat {
-        return 50
     }
     
     func didEditActivity(editActivityModel: EditActivityModel) {
@@ -167,6 +96,4 @@ class CategoriesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         self.tableView?.reloadData()
     }
-    
-
 }

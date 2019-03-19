@@ -9,15 +9,14 @@
 import UIKit
 import RealmSwift
 
-class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EditActivityViewProtocol, UIGestureRecognizerDelegate {
+class ActivitiesViewController: BasicItemsTableViewController, EditActivityViewProtocol {
 
     var category: ActivityCategory
     var activities: List<Activity>?
-    var tableView: UITableView?
     
-    init(with category: ActivityCategory) {
+    init(with category: ActivityCategory, title: String, showTabBar: Bool) {
         self.category = category
-        super.init(nibName: nil, bundle: nil)
+        super.init(title: title, showTabBar: showTabBar)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,115 +26,47 @@ class ActivitiesViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.white
-        
-        let rightButton = UIBarButtonItem(
-            image: UIImage(named:"NavBtnAdd"),
-            style:.plain ,
-            target:self ,
-            action: #selector(ActivitiesViewController.addActivity))
-        self.navigationItem.rightBarButtonItem = rightButton
-        
-        let backButton = UIBarButtonItem(
-            title: self.title,
-            style: .plain,
-            target: self,
-            action: #selector(ActivitiesViewController.back))
-        self.navigationItem.backBarButtonItem = backButton
+        self.tableView!.register(ActivityTableViewCell.self, forCellReuseIdentifier: "ActivityCell")
         
         activities = category.activities
-        
-        let screenSize = UIScreen.main.bounds.size
-        let tableViewHeight = screenSize.height - self.tabBarController!.tabBar.frame.height
-        let tableView = UITableView(
-            frame: CGRect(x: 0, y: 0, width: screenSize.width,height: tableViewHeight),
-            style: .grouped)
-        tableView.register(ActivityTableViewCell.self, forCellReuseIdentifier: "Cell")
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .singleLine
-        tableView.allowsSelection = true
-        tableView.allowsMultipleSelection = false
-        self.tableView = tableView
-        self.view.addSubview(tableView)
-        
-        let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(CategoriesViewController.longPress(_:)))
-        longPressGesture.minimumPressDuration = 1.0
-        longPressGesture.delegate = self
-        self.tableView!.addGestureRecognizer(longPressGesture)
     }
     
-    @objc func back() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func addActivity() {
+    override func tappedAddButton() {
         let vc = EditActivityViewController(with: EditActivityModel.getNewActivityModel(), delegate: self)
         vc.title = "New Activity"
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return activities!.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ActivityTableViewCell
-        let activity = activities![indexPath.section]
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityCell", for: indexPath) as! ActivityTableViewCell
+        let activity = activities![indexPath.row]
         cell.icon = activity.icon
         cell.name = activity.name
         return cell
     }
     
-    @objc func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
-        if longPressGestureRecognizer.state == UIGestureRecognizer.State.began {
-            let touchPoint = longPressGestureRecognizer.location(in: self.tableView!)
-            if let indexPath = self.tableView!.indexPathForRow(at: touchPoint) {
-                let activity = activities![indexPath.section]
-                print("longPress: \(activity.name)")
-                let vc = EditActivityViewController(
-                    with: EditActivityModel.getEditActivityModel(from: activity as Object, name: activity.name, icon: activity.icon!),
-                    delegate: self)
-                vc.title = "Edit Activity"
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
+    override func longPressRow(at indexPath: IndexPath) {
+        let activity = activities![indexPath.row]
+        let vc = EditActivityViewController(
+            with: EditActivityModel.getEditActivityModel(from: activity as Object, name: activity.name, icon: activity.icon!),
+            delegate: self)
+        vc.title = "Edit Activity"
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let activity = activities![indexPath.section]
-            print("delete \(activity.name)")
+            let activity = activities![indexPath.row]
             let result = DatabaseModel.deleteActivity(activity)
             if !result {
                 fatalError("delete Activity error")
             }
             self.tableView?.reloadData()
         }
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return activities!.count
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return UIView()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath)-> CGFloat {
-        return 50
     }
     
     func didEditActivity(editActivityModel: EditActivityModel) {
