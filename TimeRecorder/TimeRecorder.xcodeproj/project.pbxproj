@@ -30,6 +30,9 @@
 		5667FCA0223F9754002617BE /* FilteStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FC9F223F9754002617BE /* FilteStateView.swift */; };
 		5667FCA42240F032002617BE /* BasicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FCA32240F032002617BE /* BasicTableViewController.swift */; };
 		5667FCA62240FEB3002617BE /* BasicItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FCA52240FEB3002617BE /* BasicItemsTableViewController.swift */; };
+		5667FCA82242360F002617BE /* EditRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FCA72242360F002617BE /* EditRecordViewController.swift */; };
+		5667FCAA22424799002617BE /* TRCategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FCA922424799002617BE /* TRCategoryPicker.swift */; };
+		5667FCAC22424E9D002617BE /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FCAB22424E9D002617BE /* CategoryView.swift */; };
 		5682D2B022387E6D00B2B96F /* DatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */; };
 		5682D2B32238866700B2B96F /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B12238866600B2B96F /* Realm.framework */; };
 		5682D2B42238866700B2B96F /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B12238866600B2B96F /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -102,6 +105,9 @@
 		5667FC9F223F9754002617BE /* FilteStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteStateView.swift; sourceTree = "<group>"; };
 		5667FCA32240F032002617BE /* BasicTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTableViewController.swift; sourceTree = "<group>"; };
 		5667FCA52240FEB3002617BE /* BasicItemsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicItemsTableViewController.swift; sourceTree = "<group>"; };
+		5667FCA72242360F002617BE /* EditRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecordViewController.swift; sourceTree = "<group>"; };
+		5667FCA922424799002617BE /* TRCategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCategoryPicker.swift; sourceTree = "<group>"; };
+		5667FCAB22424E9D002617BE /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseModel.swift; sourceTree = "<group>"; };
 		5682D2B12238866600B2B96F /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		5682D2B22238866700B2B96F /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
@@ -218,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				5667FC442238FA54002617BE /* RecordsViewController.swift */,
+				5667FCA72242360F002617BE /* EditRecordViewController.swift */,
 			);
 			path = Records;
 			sourceTree = "<group>";
@@ -256,11 +263,13 @@
 			children = (
 				5667FC50223AEFF2002617BE /* IconViewCell.swift */,
 				5667FC52223D9888002617BE /* TRDatePicker.swift */,
-				5667FC92223E6308002617BE /* IconView.swift */,
+				5667FCA922424799002617BE /* TRCategoryPicker.swift */,
 				5667FC94223EEC0F002617BE /* EditActivityNameTableViewCell.swift */,
 				5667FC96223F20BF002617BE /* EditActivityIconTableViewCell.swift */,
 				5667FC98223F2DB0002617BE /* ActivityTableViewCell.swift */,
 				5667FC9F223F9754002617BE /* FilteStateView.swift */,
+				5667FC92223E6308002617BE /* IconView.swift */,
+				5667FCAB22424E9D002617BE /* CategoryView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -442,11 +451,14 @@
 				5667FC9E223F955D002617BE /* CategoriesFilteViewController.swift in Sources */,
 				5667FC97223F20BF002617BE /* EditActivityIconTableViewCell.swift in Sources */,
 				5667FC99223F2DB0002617BE /* ActivityTableViewCell.swift in Sources */,
+				5667FCA82242360F002617BE /* EditRecordViewController.swift in Sources */,
 				5667FC51223AEFF2002617BE /* IconViewCell.swift in Sources */,
 				5667FC4D223AEEB5002617BE /* SelectIconViewController.swift in Sources */,
+				5667FCAC22424E9D002617BE /* CategoryView.swift in Sources */,
 				5667FCA0223F9754002617BE /* FilteStateView.swift in Sources */,
 				5667FC53223D9888002617BE /* TRDatePicker.swift in Sources */,
 				5667FCA42240F032002617BE /* BasicTableViewController.swift in Sources */,
+				5667FCAA22424799002617BE /* TRCategoryPicker.swift in Sources */,
 				5667FC95223EEC0F002617BE /* EditActivityNameTableViewCell.swift in Sources */,
 				56D7E2242238895A005109A9 /* RealmObjects.swift in Sources */,
 				5667FC472238FA7D002617BE /* TimerViewController.swift in Sources */,

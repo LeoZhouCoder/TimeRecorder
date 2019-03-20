@@ -68,6 +68,9 @@ class DatabaseModel: NSObject {
             }
         }
     }
+    private static func addBasicCategories() {
+        
+    }
     
     static func getDefaultIcon() -> Icon {
         return getAllIcons()[0]

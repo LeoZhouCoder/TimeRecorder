@@ -24,8 +24,7 @@ struct EditActivityModel {
     var type: EditableActivityType
     var object: Object?
     
-    static func getNewActivityModel() -> EditActivityModel
-    {
+    static func getNewActivityModel() -> EditActivityModel {
         let model = EditActivityModel(name: "",
                                       icon: DatabaseModel.getDefaultIcon(),
                                       type: EditableActivityType.new,
@@ -33,8 +32,7 @@ struct EditActivityModel {
         return model
     }
     
-    static func getEditActivityModel(from object:Object, name:String, icon:Icon) -> EditActivityModel
-    {
+    static func getEditActivityModel(from object:Object, name:String, icon:Icon) -> EditActivityModel {
         let model = EditActivityModel(name: name,
                                       icon: icon,
                                       type: EditableActivityType.edit,
