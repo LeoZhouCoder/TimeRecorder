@@ -33,6 +33,8 @@
 		5667FCA82242360F002617BE /* EditRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FCA72242360F002617BE /* EditRecordViewController.swift */; };
 		5667FCAA22424799002617BE /* TRCategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FCA922424799002617BE /* TRCategoryPicker.swift */; };
 		5667FCAC22424E9D002617BE /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FCAB22424E9D002617BE /* CategoryView.swift */; };
+		5667FD3D22438AF3002617BE /* BaseEditAttributeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD3C22438AF3002617BE /* BaseEditAttributeTableViewController.swift */; };
+		5667FD402244E05D002617BE /* EditCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD3F2244E05D002617BE /* EditCategoryTableViewCell.swift */; };
 		5682D2B022387E6D00B2B96F /* DatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */; };
 		5682D2B32238866700B2B96F /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B12238866600B2B96F /* Realm.framework */; };
 		5682D2B42238866700B2B96F /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B12238866600B2B96F /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -108,6 +110,8 @@
 		5667FCA72242360F002617BE /* EditRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecordViewController.swift; sourceTree = "<group>"; };
 		5667FCA922424799002617BE /* TRCategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCategoryPicker.swift; sourceTree = "<group>"; };
 		5667FCAB22424E9D002617BE /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		5667FD3C22438AF3002617BE /* BaseEditAttributeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEditAttributeTableViewController.swift; sourceTree = "<group>"; };
+		5667FD3F2244E05D002617BE /* EditCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseModel.swift; sourceTree = "<group>"; };
 		5682D2B12238866600B2B96F /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		5682D2B22238866700B2B96F /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
@@ -261,6 +265,7 @@
 		5667FC4F223AEFB6002617BE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5667FD3E2244DFFB002617BE /* TableViewCell */,
 				5667FC50223AEFF2002617BE /* IconViewCell.swift */,
 				5667FC52223D9888002617BE /* TRDatePicker.swift */,
 				5667FCA922424799002617BE /* TRCategoryPicker.swift */,
@@ -287,8 +292,17 @@
 			children = (
 				5667FCA32240F032002617BE /* BasicTableViewController.swift */,
 				5667FCA52240FEB3002617BE /* BasicItemsTableViewController.swift */,
+				5667FD3C22438AF3002617BE /* BaseEditAttributeTableViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		5667FD3E2244DFFB002617BE /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5667FD3F2244E05D002617BE /* EditCategoryTableViewCell.swift */,
+			);
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 		5682D2AE22387E0B00B2B96F /* Models */ = {
@@ -441,6 +455,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5667FC412238FA09002617BE /* SettingViewController.swift in Sources */,
+				5667FD402244E05D002617BE /* EditCategoryTableViewCell.swift in Sources */,
 				5667FC4B223A0154002617BE /* EditActivityViewController.swift in Sources */,
 				5667FC452238FA54002617BE /* RecordsViewController.swift in Sources */,
 				5667FC93223E6308002617BE /* IconView.swift in Sources */,
@@ -448,6 +463,7 @@
 				5667FC492239A108002617BE /* CategoriesViewController.swift in Sources */,
 				5667FC9B223F48E9002617BE /* ActivitiesViewController.swift in Sources */,
 				5682D2B022387E6D00B2B96F /* DatabaseModel.swift in Sources */,
+				5667FD3D22438AF3002617BE /* BaseEditAttributeTableViewController.swift in Sources */,
 				5667FC9E223F955D002617BE /* CategoriesFilteViewController.swift in Sources */,
 				5667FC97223F20BF002617BE /* EditActivityIconTableViewCell.swift in Sources */,
 				5667FC99223F2DB0002617BE /* ActivityTableViewCell.swift in Sources */,

@@ -28,6 +28,7 @@ class SettingViewController: BasicTableViewController  {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        //tableView.cellForRow(at: <#T##IndexPath#>)
         let name = info[indexPath.row]
         switch name {
         case "Categories":

@@ -37,14 +37,15 @@ struct FilterModel {
     var tag:String
 }
 
-class RecordsViewController: UIViewController {
+class RecordsViewController: BasicItemsTableViewController {
     
     var records: Results<ActivityRecord>?
-    var tableView: UITableView?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Records"
     }
     
+    override func tappedAddButton() {
+        let vc = EditRecordViewController(with: nil, delegate: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }

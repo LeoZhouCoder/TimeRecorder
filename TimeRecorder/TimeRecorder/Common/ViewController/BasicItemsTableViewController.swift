@@ -17,8 +17,8 @@ class BasicItemsTableViewController: BasicTableViewController, UIGestureRecogniz
         
         let rightButton = UIBarButtonItem(
             image: UIImage(named:"NavBtnAdd"),
-            style:.plain ,
-            target:self ,
+            style: .plain ,
+            target: self ,
             action: #selector(BasicItemsTableViewController.tappedAddButton))
         self.navigationItem.rightBarButtonItem = rightButton
         

@@ -14,8 +14,8 @@ class TimerViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "Timer"
-        let screenSize = UIScreen.main.bounds.size
+        /*let screenSize = UIScreen.main.bounds.size
         let picker = TRCategoryPicker(frame: CGRect(x: 0, y: 200, width: screenSize.width, height: screenSize.height * 0.4), delegate: nil)
-        self.view.addSubview(picker)
+        self.view.addSubview(picker)*/
     }
 }

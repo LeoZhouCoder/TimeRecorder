@@ -65,14 +65,13 @@ class EditActivityViewController: BasicTableViewController, SelectIconViewProtoc
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView!.register(EditActivityNameTableViewCell.self, forCellReuseIdentifier: "NameCell")
         tableView!.register(EditActivityIconTableViewCell.self, forCellReuseIdentifier: "IconCell")
         
         let rightButton = UIBarButtonItem(
             title: "Done",
-            style:.done ,
-            target:self ,
+            style: .done,
+            target: self,
             action: #selector(EditActivityViewController.done))
         self.navigationItem.rightBarButtonItem = rightButton
         

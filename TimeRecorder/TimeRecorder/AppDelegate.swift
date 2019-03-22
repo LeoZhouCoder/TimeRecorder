@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             tag: 100)
         
         // records
-        let recordsViewController = RecordsViewController()
+        let recordsViewController = RecordsViewController(title: "Records", showTabBar: true)
         recordsViewController.tabBarItem = UITabBarItem(
             title: "Records",
             image: UIImage(named: "TabRecords"),

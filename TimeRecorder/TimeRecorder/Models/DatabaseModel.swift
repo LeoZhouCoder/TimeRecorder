@@ -138,6 +138,7 @@ class DatabaseModel: NSObject {
         let item = Activity();
         item.name = name
         item.icon = icon
+        item.category = category
         try! realm.write {
             category.activities.append(item)
         }
@@ -148,6 +149,7 @@ class DatabaseModel: NSObject {
         try! realm.write {
             item.name = name
             item.icon = icon
+            item.category = category
             realm.add(item, update: true)
         }
         return true

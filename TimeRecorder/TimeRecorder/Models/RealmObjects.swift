@@ -36,8 +36,9 @@ class Activity: Object {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var name = ""
     @objc dynamic var icon: Icon?
+    @objc dynamic var category: ActivityCategory?
     
-    let category = LinkingObjects(fromType: ActivityCategory.self, property: "activities")
+    let linkToCategory = LinkingObjects(fromType: ActivityCategory.self, property: "activities")
     
     let records = List<ActivityRecord>()
     
@@ -51,8 +52,9 @@ class ActivityRecord: Object {
     @objc dynamic var startTime = Date()
     @objc dynamic var endTime = Date()
     @objc dynamic var tag = ""
+    @objc dynamic var activity:Activity?
     
-    let activity = LinkingObjects(fromType: Activity.self, property: "records")
+    let linkToActivity = LinkingObjects(fromType: Activity.self, property: "records")
     
     override static func primaryKey() -> String? {
         return "id"
