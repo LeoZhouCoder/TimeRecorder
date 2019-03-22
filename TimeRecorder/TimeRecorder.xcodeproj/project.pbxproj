@@ -35,6 +35,7 @@
 		5667FCAC22424E9D002617BE /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FCAB22424E9D002617BE /* CategoryView.swift */; };
 		5667FD3D22438AF3002617BE /* BaseEditAttributeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD3C22438AF3002617BE /* BaseEditAttributeTableViewController.swift */; };
 		5667FD402244E05D002617BE /* EditCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD3F2244E05D002617BE /* EditCategoryTableViewCell.swift */; };
+		5667FD422244F476002617BE /* EditDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD412244F476002617BE /* EditDateTableViewCell.swift */; };
 		5682D2B022387E6D00B2B96F /* DatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */; };
 		5682D2B32238866700B2B96F /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B12238866600B2B96F /* Realm.framework */; };
 		5682D2B42238866700B2B96F /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B12238866600B2B96F /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -112,6 +113,7 @@
 		5667FCAB22424E9D002617BE /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		5667FD3C22438AF3002617BE /* BaseEditAttributeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEditAttributeTableViewController.swift; sourceTree = "<group>"; };
 		5667FD3F2244E05D002617BE /* EditCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryTableViewCell.swift; sourceTree = "<group>"; };
+		5667FD412244F476002617BE /* EditDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDateTableViewCell.swift; sourceTree = "<group>"; };
 		5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseModel.swift; sourceTree = "<group>"; };
 		5682D2B12238866600B2B96F /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		5682D2B22238866700B2B96F /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				5667FD3F2244E05D002617BE /* EditCategoryTableViewCell.swift */,
+				5667FD412244F476002617BE /* EditDateTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				56D7E2242238895A005109A9 /* RealmObjects.swift in Sources */,
 				5667FC472238FA7D002617BE /* TimerViewController.swift in Sources */,
 				5667FC432238FA43002617BE /* ChatsViewController.swift in Sources */,
+				5667FD422244F476002617BE /* EditDateTableViewCell.swift in Sources */,
 				5616598222385E8C005E9D0C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
