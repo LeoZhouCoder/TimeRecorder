@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 protocol TRCategoryPickerProtocol {
-    func didPickCategory(category: ActivityCategory, isClosed: Bool)
+    func didPickActivity(activity: Activity, isClosed: Bool)
 }
 
 class TRCategoryPicker: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
@@ -28,7 +28,7 @@ class TRCategoryPicker: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor.white
+        //self.backgroundColor = UIColor.white
         self.delegate = delegate
         
         categories = DatabaseModel.getAllActivityCategory()
@@ -43,6 +43,7 @@ class TRCategoryPicker: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         
         let borderWidth: CGFloat = 2
         picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.backgroundColor = UIColor.white
         picker.layer.masksToBounds = true
         picker.layer.borderColor = UIColor.lightGray.cgColor
         picker.layer.borderWidth = borderWidth
@@ -68,7 +69,8 @@ class TRCategoryPicker: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     @objc func close() {
-        //self.delegate?.didPickCategory(category: <#T##ActivityCategory#>, isClosed: <#T##Bool#>)
+        let activity = categories![categoryIndex].activities[picker.selectedRow(inComponent: 1)]
+        self.delegate?.didPickActivity(activity: activity, isClosed: true)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -83,10 +85,10 @@ class TRCategoryPicker: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         if component == 0 {
             categoryIndex = row
             picker.reloadComponent(1)
-        }else{
-            let activity = categories![categoryIndex].activities[row]
-            print("Selected activity: \(activity)")
         }
+        let activity = categories![categoryIndex].activities[picker.selectedRow(inComponent: 1)]
+        //print("Selected activity: \(activity)")
+        self.delegate?.didPickActivity(activity: activity, isClosed: false)
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {

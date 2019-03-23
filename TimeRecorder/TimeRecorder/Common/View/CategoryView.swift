@@ -41,11 +41,10 @@ class CategoryView: UIView {
         self.addSubview(iconView)
         self.addSubview(nameText)
         NSLayoutConstraint.activate([
-            //iconView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
-            iconView.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -iconView.frame.size.width * 0.5 - 50),
-            iconView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            iconView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+            iconView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.7),
             iconView.widthAnchor.constraint(equalTo: self.iconView.heightAnchor),
+            iconView.leftAnchor.constraint(equalTo: self.leftAnchor),
+            iconView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             
             nameText.leftAnchor.constraint(equalTo: self.iconView.rightAnchor, constant: 10),
             nameText.centerYAnchor.constraint(equalTo: self.centerYAnchor),

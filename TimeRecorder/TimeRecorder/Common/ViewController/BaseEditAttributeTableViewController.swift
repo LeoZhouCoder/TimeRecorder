@@ -14,26 +14,21 @@ enum AttributeType:String {
     case note = "NoteCell"
     var cellClass: AnyClass {
         switch self {
-        case .category: return EditActivityIconTableViewCell.self
-        case .date: return EditActivityIconTableViewCell.self
-        case .note: return EditActivityIconTableViewCell.self
+        case .category: return EditCategoryTableViewCell.self
+        case .date: return EditDateTableViewCell.self
+        case .note: return EditNoteTableViewCell.self
         }
     }
 }
 
 struct AttributeDate {
     let name: String
-    let title: String
     let type: AttributeType
 }
 
 class BaseEditAttributeTableViewController: BasicTableViewController {
 
-    var attributes:[AttributeDate] = [
-        AttributeDate(name: "category", title: "Category", type: AttributeType.category),
-        AttributeDate(name: "startDate", title: "StartDate", type: AttributeType.date),
-        AttributeDate(name: "endDate", title: "EndDate", type: AttributeType.date),
-        AttributeDate(name: "note", title: "Note", type: AttributeType.note)]
+    var attributes:[AttributeDate] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,22 +43,24 @@ class BaseEditAttributeTableViewController: BasicTableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return attributes.count
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let attribute = attributes[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: attribute.type.rawValue, for: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: attribute.type.rawValue, for: indexPath) as! BaseEditRecordTableViewCell
         return setCellDate(cellForRowAt: indexPath, cell: cell)
     }
     
     // override this function to set cell date
-    func setCellDate(cellForRowAt indexPath: IndexPath, cell: UITableViewCell) -> UITableViewCell {
+    func setCellDate(cellForRowAt indexPath: IndexPath, cell: BaseEditRecordTableViewCell) -> UITableViewCell {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        //let category = categories![indexPath.row]
-        //let vc = ActivitiesViewController(with: category, title: "Activities", showTabBar: false)
-        //self.navigationController?.pushViewController(vc, animated: true)
+    
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath)-> CGFloat {
+        return 70
     }
 }

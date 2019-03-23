@@ -8,14 +8,8 @@
 
 import UIKit
 
-class EditDateTableViewCell: UITableViewCell {
+class EditDateTableViewCell: BaseEditRecordTableViewCell {
 
-    var title:String? {
-        didSet {
-            titleText.text = title
-        }
-    }
-    
     var date: Date? {
         didSet {
             // 判断日期是今天
@@ -25,38 +19,24 @@ class EditDateTableViewCell: UITableViewCell {
         }
     }
     
-    var titleText: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.textColor = UIColor.black
-        return textField
-    }()
-    
     var dateText: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textColor = UIColor.black
+        textField.isUserInteractionEnabled = false
         return textField
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.addSubview(titleText)
-        self.addSubview(dateText)
+        container.addSubview(dateText)
         
         NSLayoutConstraint.activate([
-            titleText.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
-            titleText.widthAnchor.constraint(equalToConstant: 100),
-            titleText.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2),
-            titleText.centerXAnchor.constraint(equalTo: self.centerXAnchor,
-                                               constant: -(titleText.frame.size.height + dateText.frame.size.height)/2),
-            
+            dateText.heightAnchor.constraint(equalTo: container.heightAnchor, multiplier: 0.65),
+            dateText.widthAnchor.constraint(equalTo: container.widthAnchor),
             dateText.leftAnchor.constraint(equalTo: titleText.leftAnchor),
             dateText.topAnchor.constraint(equalTo: titleText.bottomAnchor),
-            dateText.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4),
-            dateText.widthAnchor.constraint(equalToConstant: 200),
-            
             ])
     }
     

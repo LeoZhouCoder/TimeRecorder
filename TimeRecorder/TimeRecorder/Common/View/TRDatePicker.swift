@@ -18,14 +18,13 @@ class TRDatePicker: UIView {
     var closeButton: UIButton
     var datePicker: UIDatePicker
     
-    init(frame: CGRect, delegate: TRDatePickerProtocol) {
+    init(frame: CGRect, delegate: TRDatePickerProtocol?) {
         
         closeButton = UIButton(type: .custom)
         datePicker = UIDatePicker(frame: .zero)
         
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor.white
         self.delegate = delegate
         
         closeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -43,6 +42,7 @@ class TRDatePicker: UIView {
         datePicker.layer.borderWidth = borderWidth
         datePicker.datePickerMode = .dateAndTime
         datePicker.minuteInterval = 1
+        datePicker.backgroundColor = UIColor.white
         datePicker.date = Date()
         datePicker.addTarget(self,
                              action:#selector(TRDatePicker.datePickerChanged),

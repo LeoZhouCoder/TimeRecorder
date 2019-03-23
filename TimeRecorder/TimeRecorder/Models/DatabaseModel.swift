@@ -132,7 +132,9 @@ class DatabaseModel: NSObject {
         return true
     }
     
-    
+    static func getAllActivities() -> Results<Activity> {
+        return realm.objects(Activity.self)
+    }
     
     static func addActivity(_ name:String, _ icon: Icon, _ category: ActivityCategory) -> Bool {
         let item = Activity();
@@ -163,18 +165,42 @@ class DatabaseModel: NSObject {
     }
     
     
-    static func addActivityRecord(_ name:String, _ icon: Icon) -> Bool {
+    static func addActivityRecord(activity: Activity,
+                                  startTime: Date,
+                                  endTime: Date,
+                                  node: String) -> Bool {
         
+        print("addActivityRecord \(activity.name) startTime: \(startTime) endTime: \(endTime) node\(node)")
+        let record = ActivityRecord();
+        record.activity = activity
+        record.startTime = startTime
+        record.endTime = endTime
+        record.tag = node
+        try! realm.write {
+            activity.records.append(record)
+        }
         return true
     }
     
-    static func updateActivityRecord(_ id:String, _ name:String, _ icon: Icon) ->Bool {
-        
+    static func updateActivityRecord(record: ActivityRecord,
+                                     activity: Activity,
+                                     startTime: Date,
+                                     endTime: Date,
+                                     node: String) ->Bool {
+        try! realm.write {
+            record.activity = activity
+            record.startTime = startTime
+            record.endTime = endTime
+            record.tag = node
+            realm.add(record, update: true)
+        }
         return true
     }
     
-    static func deleteActivityRecord(_ id:String) -> Bool {
-        
+    static func deleteActivityRecord(record:Activity) -> Bool {
+        try! realm.write {
+            realm.delete(record)
+        }
         return true
     }
 }

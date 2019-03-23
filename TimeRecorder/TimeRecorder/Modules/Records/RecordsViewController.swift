@@ -37,7 +37,7 @@ struct FilterModel {
     var tag:String
 }
 
-class RecordsViewController: BasicItemsTableViewController {
+class RecordsViewController: BasicItemsTableViewController, EditRecordViewProtocol {
     
     var records: Results<ActivityRecord>?
     override func viewDidLoad() {
@@ -45,7 +45,30 @@ class RecordsViewController: BasicItemsTableViewController {
     }
     
     override func tappedAddButton() {
-        let vc = EditRecordViewController(with: nil, delegate: nil)
+        let vc = EditRecordViewController(with: nil, delegate: self)
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func didEditRecord(editRecordModel:EditRecordModel) {
+        switch editRecordModel.editType {
+        case EditRecordType.modify:
+            let result = DatabaseModel.updateActivityRecord(record: editRecordModel.record!,
+                                               activity: editRecordModel.activity,
+                                               startTime: editRecordModel.startDate,
+                                               endTime: editRecordModel.endDate,
+                                               node: editRecordModel.node!)
+            if !result {
+                fatalError("updateActivityCategory error")
+            }
+        case EditRecordType.new:
+            let result = DatabaseModel.addActivityRecord(activity: editRecordModel.activity,
+                                            startTime: editRecordModel.startDate,
+                                            endTime: editRecordModel.endDate,
+                                            node: editRecordModel.node!)
+            if !result {
+                fatalError("addActivityCategory error")
+            }
+        }
+        self.tableView?.reloadData()
     }
 }
