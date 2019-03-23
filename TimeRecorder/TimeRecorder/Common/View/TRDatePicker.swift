@@ -14,9 +14,31 @@ protocol TRDatePickerProtocol {
 
 class TRDatePicker: UIView {
 
-    var delegate: TRDatePickerProtocol?
-    var closeButton: UIButton
-    var datePicker: UIDatePicker
+    private var delegate: TRDatePickerProtocol?
+    private var closeButton: UIButton
+    private var datePicker: UIDatePicker
+    
+    var minimumDate: Date? {
+        didSet{
+            datePicker.minimumDate = minimumDate
+        }
+    }
+    
+    var maximumDate: Date? {
+        didSet {
+            datePicker.maximumDate = maximumDate
+        }
+    }
+    
+    var date: Date? {
+        didSet {
+            if let date = date {
+                datePicker.date = date
+            }else{
+                datePicker.date = Date()
+            }
+        }
+    }
     
     init(frame: CGRect, delegate: TRDatePickerProtocol?) {
         
@@ -66,11 +88,11 @@ class TRDatePicker: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func close() {
+    @objc private func close() {
         self.delegate?.didPickDate(date: datePicker.date, isClosed: true)
     }
     
-    @objc func datePickerChanged(datePicker:UIDatePicker) {
+    @objc private func datePickerChanged(datePicker:UIDatePicker) {
         self.delegate?.didPickDate(date: datePicker.date, isClosed: false)
     }
     

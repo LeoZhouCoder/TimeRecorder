@@ -151,9 +151,9 @@ class EditRecordViewController: BaseEditAttributeTableViewController, UITextFiel
         case EditableRecordAttribute.category.rawValue:
             showCategoryPicker()
         case EditableRecordAttribute.startDate.rawValue:
-            showDatePicker()
+            showDatePicker(attribute: attribute)
         case EditableRecordAttribute.endDate.rawValue:
-            showDatePicker()
+            showDatePicker(attribute: attribute)
         case EditableRecordAttribute.note.rawValue:
             //let noteCell = cell as! EditNoteTableViewCell
             //noteCell.note = "Test note."
@@ -185,9 +185,21 @@ class EditRecordViewController: BaseEditAttributeTableViewController, UITextFiel
         }
     }
     
-    func showDatePicker() {
+    func showDatePicker(attribute: AttributeDate) {
         self.datePicker?.isHidden = false
         self.categoryPicker?.isHidden = true
+        switch attribute.name {
+        case EditableRecordAttribute.startDate.rawValue:
+            self.datePicker?.date = model.startDate
+            self.datePicker?.minimumDate = nil
+            self.datePicker?.maximumDate = model.endDate
+        case EditableRecordAttribute.endDate.rawValue:
+            self.datePicker?.date = model.endDate
+            self.datePicker?.minimumDate = model.startDate
+            self.datePicker?.maximumDate = nil
+        default:
+            print(attribute.name)
+        }
     }
     
     func didPickDate(date: Date, isClosed: Bool) {

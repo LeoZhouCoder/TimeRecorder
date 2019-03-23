@@ -28,6 +28,8 @@ class EditNoteTableViewCell: BaseEditRecordTableViewCell {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textColor = UIColor.black
+        textField.placeholder = "Add some note"
+        textField.clearButtonMode = .always
         textField.isUserInteractionEnabled = false
         return textField
     }()

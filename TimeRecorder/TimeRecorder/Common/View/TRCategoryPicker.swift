@@ -38,7 +38,7 @@ class TRCategoryPicker: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         closeButton.clipsToBounds = true
         closeButton.setImage(UIImage(named:"NavBtnAdd"), for: .normal)
         closeButton.backgroundColor = UIColor.lightGray
-        closeButton.addTarget(self, action: #selector(TRDatePicker.close), for: .touchUpInside)
+        closeButton.addTarget(self, action: #selector(TRCategoryPicker.close), for: .touchUpInside)
         addSubview(closeButton)
         
         let borderWidth: CGFloat = 2
