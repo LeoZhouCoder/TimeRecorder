@@ -38,7 +38,6 @@
 		5667FD422244F476002617BE /* EditDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD412244F476002617BE /* EditDateTableViewCell.swift */; };
 		5667FD442244F68D002617BE /* EditNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD432244F68D002617BE /* EditNoteTableViewCell.swift */; };
 		5667FD472245876F002617BE /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD462245876F002617BE /* UIImageView+Extensions.swift */; };
-		5667FD4922458C26002617BE /* UITableViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD4822458C26002617BE /* UITableViewCell+Extensions.swift */; };
 		5667FD4B22458DF1002617BE /* BaseEditRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD4A22458DF1002617BE /* BaseEditRecordTableViewCell.swift */; };
 		5667FD4D2245EA59002617BE /* TCRecordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD4C2245EA59002617BE /* TCRecordList.swift */; };
 		5667FD4F22460046002617BE /* Common+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD4E22460046002617BE /* Common+Extensions.swift */; };
@@ -122,7 +121,6 @@
 		5667FD412244F476002617BE /* EditDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDateTableViewCell.swift; sourceTree = "<group>"; };
 		5667FD432244F68D002617BE /* EditNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteTableViewCell.swift; sourceTree = "<group>"; };
 		5667FD462245876F002617BE /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
-		5667FD4822458C26002617BE /* UITableViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extensions.swift"; sourceTree = "<group>"; };
 		5667FD4A22458DF1002617BE /* BaseEditRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEditRecordTableViewCell.swift; sourceTree = "<group>"; };
 		5667FD4C2245EA59002617BE /* TCRecordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCRecordList.swift; sourceTree = "<group>"; };
 		5667FD4E22460046002617BE /* Common+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Common+Extensions.swift"; sourceTree = "<group>"; };
@@ -328,7 +326,6 @@
 			isa = PBXGroup;
 			children = (
 				5667FD462245876F002617BE /* UIImageView+Extensions.swift */,
-				5667FD4822458C26002617BE /* UITableViewCell+Extensions.swift */,
 				5667FD4E22460046002617BE /* Common+Extensions.swift */,
 			);
 			path = Extensions;
@@ -491,7 +488,6 @@
 				5667FC93223E6308002617BE /* IconView.swift in Sources */,
 				5667FCA62240FEB3002617BE /* BasicItemsTableViewController.swift in Sources */,
 				5667FC492239A108002617BE /* CategoriesViewController.swift in Sources */,
-				5667FD4922458C26002617BE /* UITableViewCell+Extensions.swift in Sources */,
 				5667FC9B223F48E9002617BE /* ActivitiesViewController.swift in Sources */,
 				5682D2B022387E6D00B2B96F /* DatabaseModel.swift in Sources */,
 				5667FD3D22438AF3002617BE /* BaseEditAttributeTableViewController.swift in Sources */,
