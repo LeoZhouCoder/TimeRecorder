@@ -40,6 +40,8 @@
 		5667FD472245876F002617BE /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD462245876F002617BE /* UIImageView+Extensions.swift */; };
 		5667FD4922458C26002617BE /* UITableViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD4822458C26002617BE /* UITableViewCell+Extensions.swift */; };
 		5667FD4B22458DF1002617BE /* BaseEditRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD4A22458DF1002617BE /* BaseEditRecordTableViewCell.swift */; };
+		5667FD4D2245EA59002617BE /* TCRecordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD4C2245EA59002617BE /* TCRecordList.swift */; };
+		5667FD4F22460046002617BE /* Common+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD4E22460046002617BE /* Common+Extensions.swift */; };
 		5682D2B022387E6D00B2B96F /* DatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */; };
 		5682D2B32238866700B2B96F /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B12238866600B2B96F /* Realm.framework */; };
 		5682D2B42238866700B2B96F /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B12238866600B2B96F /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -122,6 +124,8 @@
 		5667FD462245876F002617BE /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		5667FD4822458C26002617BE /* UITableViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extensions.swift"; sourceTree = "<group>"; };
 		5667FD4A22458DF1002617BE /* BaseEditRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEditRecordTableViewCell.swift; sourceTree = "<group>"; };
+		5667FD4C2245EA59002617BE /* TCRecordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCRecordList.swift; sourceTree = "<group>"; };
+		5667FD4E22460046002617BE /* Common+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Common+Extensions.swift"; sourceTree = "<group>"; };
 		5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseModel.swift; sourceTree = "<group>"; };
 		5682D2B12238866600B2B96F /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		5682D2B22238866700B2B96F /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
@@ -315,6 +319,7 @@
 				5667FD412244F476002617BE /* EditDateTableViewCell.swift */,
 				5667FD432244F68D002617BE /* EditNoteTableViewCell.swift */,
 				5667FD4A22458DF1002617BE /* BaseEditRecordTableViewCell.swift */,
+				5667FD4C2245EA59002617BE /* TCRecordList.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -324,6 +329,7 @@
 			children = (
 				5667FD462245876F002617BE /* UIImageView+Extensions.swift */,
 				5667FD4822458C26002617BE /* UITableViewCell+Extensions.swift */,
+				5667FD4E22460046002617BE /* Common+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -496,6 +502,7 @@
 				5667FCA82242360F002617BE /* EditRecordViewController.swift in Sources */,
 				5667FC51223AEFF2002617BE /* IconViewCell.swift in Sources */,
 				5667FC4D223AEEB5002617BE /* SelectIconViewController.swift in Sources */,
+				5667FD4F22460046002617BE /* Common+Extensions.swift in Sources */,
 				5667FCAC22424E9D002617BE /* CategoryView.swift in Sources */,
 				5667FD4B22458DF1002617BE /* BaseEditRecordTableViewCell.swift in Sources */,
 				5667FCA0223F9754002617BE /* FilteStateView.swift in Sources */,
@@ -508,6 +515,7 @@
 				5667FC432238FA43002617BE /* ChatsViewController.swift in Sources */,
 				5667FD422244F476002617BE /* EditDateTableViewCell.swift in Sources */,
 				5616598222385E8C005E9D0C /* AppDelegate.swift in Sources */,
+				5667FD4D2245EA59002617BE /* TCRecordList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
