@@ -197,10 +197,14 @@ class DatabaseModel: NSObject {
         return true
     }
     
-    static func deleteActivityRecord(record:Activity) -> Bool {
+    static func deleteActivityRecord(record:ActivityRecord) -> Bool {
         try! realm.write {
             realm.delete(record)
         }
         return true
+    }
+    
+    static func getAllRecords() -> Results<ActivityRecord> {
+        return realm.objects(ActivityRecord.self).sorted(byKeyPath: "startTime",ascending: false)
     }
 }

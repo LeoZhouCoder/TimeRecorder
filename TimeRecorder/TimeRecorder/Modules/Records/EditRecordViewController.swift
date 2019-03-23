@@ -127,16 +127,16 @@ class EditRecordViewController: BaseEditAttributeTableViewController, UITextFiel
         switch attribute.name {
         case EditableRecordAttribute.category.rawValue:
             let categoryCell = cell as! EditCategoryTableViewCell
-            categoryCell.activity = DatabaseModel.getAllActivities()[0]
+            categoryCell.activity = model.activity
         case EditableRecordAttribute.startDate.rawValue:
             let startDateCell = cell as! EditDateTableViewCell
-            startDateCell.date = Date()
+            startDateCell.date = model.startDate
         case EditableRecordAttribute.endDate.rawValue:
             let startDateCell = cell as! EditDateTableViewCell
-            startDateCell.date = Date()
+            startDateCell.date = model.endDate
         case EditableRecordAttribute.note.rawValue:
             let noteCell = cell as! EditNoteTableViewCell
-            noteCell.note = "Test note."
+            noteCell.note = model.node
             noteCell.noteTextDelegate = self
         default:
             print("implemented")

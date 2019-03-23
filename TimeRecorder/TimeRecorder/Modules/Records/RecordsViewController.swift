@@ -40,13 +40,46 @@ struct FilterModel {
 class RecordsViewController: BasicItemsTableViewController, EditRecordViewProtocol {
     
     var records: Results<ActivityRecord>?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView!.register(RecordListTableViewCell.self, forCellReuseIdentifier: "RecordCell")
+        
+        records = DatabaseModel.getAllRecords()
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return records!.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RecordCell", for: indexPath) as! RecordListTableViewCell
+        let record = records![indexPath.row]
+        cell.record = record
+        return cell
     }
     
     override func tappedAddButton() {
         let vc = EditRecordViewController(with: nil, delegate: self)
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    override func longPressRow(at indexPath: IndexPath) {
+        let record = records![indexPath.row]
+        let vc = EditRecordViewController(with: record, delegate: self)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let record = records![indexPath.row]
+            let result = DatabaseModel.deleteActivityRecord(record: record)
+            if !result {
+                fatalError("delete ActivityCategory error")
+            }
+            self.tableView?.reloadData()
+        }
     }
     
     func didEditRecord(editRecordModel:EditRecordModel) {
@@ -70,5 +103,9 @@ class RecordsViewController: BasicItemsTableViewController, EditRecordViewProtoc
             }
         }
         self.tableView?.reloadData()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath)-> CGFloat {
+        return 60
     }
 }
