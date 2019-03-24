@@ -42,6 +42,7 @@
 		5667FD4D2245EA59002617BE /* RecordListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD4C2245EA59002617BE /* RecordListTableViewCell.swift */; };
 		5667FD4F22460046002617BE /* Common+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD4E22460046002617BE /* Common+Extensions.swift */; };
 		5667FD5122461CB5002617BE /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD5022461CB5002617BE /* Date+Extensions.swift */; };
+		5667FD542246BF76002617BE /* Records.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD532246BF76002617BE /* Records.swift */; };
 		5682D2B022387E6D00B2B96F /* DatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */; };
 		5682D2B32238866700B2B96F /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B12238866600B2B96F /* Realm.framework */; };
 		5682D2B42238866700B2B96F /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5682D2B12238866600B2B96F /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -126,6 +127,7 @@
 		5667FD4C2245EA59002617BE /* RecordListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListTableViewCell.swift; sourceTree = "<group>"; };
 		5667FD4E22460046002617BE /* Common+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Common+Extensions.swift"; sourceTree = "<group>"; };
 		5667FD5022461CB5002617BE /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		5667FD532246BF76002617BE /* Records.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Records.swift; sourceTree = "<group>"; };
 		5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseModel.swift; sourceTree = "<group>"; };
 		5682D2B12238866600B2B96F /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		5682D2B22238866700B2B96F /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 			children = (
 				5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */,
 				56D7E2232238895A005109A9 /* RealmObjects.swift */,
+				5667FD532246BF76002617BE /* Records.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				5667FC412238FA09002617BE /* SettingViewController.swift in Sources */,
 				5667FD402244E05D002617BE /* EditCategoryTableViewCell.swift in Sources */,
 				5667FC4B223A0154002617BE /* EditActivityViewController.swift in Sources */,
+				5667FD542246BF76002617BE /* Records.swift in Sources */,
 				5667FC452238FA54002617BE /* RecordsViewController.swift in Sources */,
 				5667FC93223E6308002617BE /* IconView.swift in Sources */,
 				5667FCA62240FEB3002617BE /* BasicItemsTableViewController.swift in Sources */,
