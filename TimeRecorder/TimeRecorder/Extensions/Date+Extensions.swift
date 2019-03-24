@@ -8,6 +8,11 @@
 
 import Foundation
 
+public enum Weekday: Int {
+    case sunday = 1
+    case monday, tuesday, wednesday, thursday, friday, saturday
+}
+
 extension Date {
     
     static var todayMidnight: Date {
@@ -173,5 +178,48 @@ extension Date {
         let subtractedDate = Date(timeIntervalSince1970: timeInterval)
         //print("subtractedDate: \(subtractedDate)")
         return subtractedDate.toString(format: format)
+    }
+    
+    public func today() -> (startTime: Date, endTime: Date) {
+        let startTime = self.midnight
+        let endTime = startTime + 24 * 60 * 60
+        return (startTime, endTime)
+    }
+    
+    public func thisWeek(from weekday: Weekday) -> (startTime: Date, endTime: Date) {
+        let weekday = (calendar.component(.weekday, from: self) + 7 - weekday.rawValue) % 7
+        let startTime = self.midnight - TimeInterval(weekday * 24 * 60 * 60)
+        let endTime = startTime + 7 * 24 * 60 * 60
+        return (startTime, endTime)
+    }
+    
+    public func thisMonth() -> (startTime: Date, endTime: Date) {
+        let startTime = Date(calendar: calendar, timeZone: timeZone, era: era,
+             year: year, month: month, day: 1,
+             hour: 0, minute: 0, second: 0, nanosecond: 0)
+        let endTime = Date(calendar: calendar, timeZone: timeZone, era: era,
+                           year: year, month: (month + 1) % 12, day: 1,
+                           hour: 0, minute: 0, second: 0, nanosecond: 0)
+        return (startTime, endTime)
+    }
+    
+    public func thisQuarter() -> (startTime: Date, endTime: Date) {
+        let startTime = Date(calendar: calendar, timeZone: timeZone, era: era,
+                             year: year, month: Int((month - 1) / 3) * 3 + 1, day: 1,
+                             hour: 0, minute: 0, second: 0, nanosecond: 0)
+        let endTime = Date(calendar: calendar, timeZone: timeZone, era: era,
+                           year: year, month: (Int((month - 1) / 3) + 1) * 3 + 1, day: 1,
+                           hour: 0, minute: 0, second: 0, nanosecond: 0)
+        return (startTime, endTime)
+    }
+    
+    public func thisYear() -> (startTime: Date, endTime: Date) {
+        let startTime = Date(calendar: calendar, timeZone: timeZone, era: era,
+                             year: year, month: 1, day: 1,
+                             hour: 0, minute: 0, second: 0, nanosecond: 0)
+        let endTime = Date(calendar: calendar, timeZone: timeZone, era: era,
+                           year: year + 1, month: 1, day: 1,
+                           hour: 0, minute: 0, second: 0, nanosecond: 0)
+        return (startTime, endTime)
     }
 }
