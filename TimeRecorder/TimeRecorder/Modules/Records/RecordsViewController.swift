@@ -31,11 +31,11 @@ struct PeriodData {
     }*/
 }
 
-struct FilterModel {
+/*struct FilterModel {
     var period: PeriodData
     var activities: List<Activity>
     var tag:String
-}
+}*/
 
 class RecordsViewController: BasicItemsTableViewController, EditRecordViewProtocol {
     
@@ -47,6 +47,15 @@ class RecordsViewController: BasicItemsTableViewController, EditRecordViewProtoc
         self.tableView!.register(RecordListTableViewCell.self, forCellReuseIdentifier: "RecordCell")
         
         records = DatabaseModel.getAllRecords()
+        
+        let activity = DatabaseModel.getAllActivities()[1]
+        
+        let filterModel = FilterModel(startDate: Date.init(from: "2019-03-23 07:00", dateFormat: "yyyy-MM-dd HH:mm"),
+                                      endDate: Date.init(from: "2019-03-23 21:00", dateFormat: "yyyy-MM-dd HH:mm"),
+                                      activities: [activity],
+                                      note: nil)
+        let result = Records.getRecords(filterModel: filterModel)
+        print(result)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

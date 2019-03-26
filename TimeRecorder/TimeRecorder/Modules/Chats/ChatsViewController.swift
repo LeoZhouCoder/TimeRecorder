@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Charts
 
 class ChatsViewController: UIViewController {
 
@@ -14,5 +15,21 @@ class ChatsViewController: UIViewController {
         super.viewDidLoad()
 
         self.title = "Chats"
+        
+        // Test Chats
+        let chartView = LineChartView()
+        chartView.frame = CGRect(x: 20, y: 80, width: self.view.bounds.width - 40,
+                                 height: 300)
+        self.view.addSubview(chartView)
+        
+        var dataEntries = [ChartDataEntry]()
+        for i in 0..<20 {
+            let y = arc4random()%100
+            let entry = ChartDataEntry.init(x: Double(i), y: Double(y))
+            dataEntries.append(entry)
+        }
+        let chartDataSet = LineChartDataSet(values: dataEntries, label: "LineChat")
+        let chartData = LineChartData(dataSets: [chartDataSet])
+        chartView.data = chartData
     }
 }
