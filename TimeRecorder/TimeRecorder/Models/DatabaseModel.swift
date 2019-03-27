@@ -13,6 +13,59 @@ enum IconType: Int {
     case system, coutomize, deleted
 }
 
+class Icon: Object {
+    @objc dynamic var id = UUID().uuidString
+    @objc dynamic var type = 0
+    @objc dynamic var name = ""
+    @objc dynamic var image = Data()
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+}
+
+class ActivityCategory: Object {
+    @objc dynamic var id = UUID().uuidString
+    @objc dynamic var name = ""
+    @objc dynamic var icon: Icon?
+    
+    let activities = List<Activity>()
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+}
+
+class Activity: Object {
+    @objc dynamic var id = UUID().uuidString
+    @objc dynamic var name = ""
+    @objc dynamic var icon: Icon?
+    @objc dynamic var category: ActivityCategory?
+    
+    let linkToCategory = LinkingObjects(fromType: ActivityCategory.self, property: "activities")
+    
+    let records = List<ActivityRecord>()
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+}
+
+class ActivityRecord: Object {
+    @objc dynamic var id = UUID().uuidString
+    @objc dynamic var startTime = Date()
+    @objc dynamic var endTime = Date()
+    @objc dynamic var node = ""
+    @objc dynamic var activity:Activity?
+    
+    let linkToActivity = LinkingObjects(fromType: Activity.self, property: "records")
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+}
+
+
 class DatabaseModel: NSObject {
     
     static let iconImages = ["IconWork", "IconHome", "IconFun"]
@@ -68,15 +121,12 @@ class DatabaseModel: NSObject {
             }
         }
     }
-    private static func addBasicCategories() {
-        
-    }
     
     static func getDefaultIcon() -> Icon {
         return getAllIcons()[0]
     }
     
-    static func getAllIcons() -> Results<Icon> {
+    static func getIcons() -> Results<Icon> {
         return realm.objects(Icon.self).filter("type != \(IconType.deleted.rawValue) ").sorted(byKeyPath: "type")
     }
     
@@ -109,10 +159,7 @@ class DatabaseModel: NSObject {
         return true
     }
     
-    static func getAllActivityCategory() -> Results<ActivityCategory> {
-        // statusItems = realm.objects(Status).filter("StatusID  > 111 ")
-        // statusItems = self.realm.objects(Status).filter("StatusID > 111 ").filter("text = '这是第二条test'")
-        // statusItems = self.realm.objects(Status).filter("StatusID > 111").sorted("StatusID")
+    static func getActivityCategories() -> Results<ActivityCategory> {
         return realm.objects(ActivityCategory.self)
     }
     
@@ -169,8 +216,6 @@ class DatabaseModel: NSObject {
                                   startTime: Date,
                                   endTime: Date,
                                   node: String) -> Bool {
-        
-        print("addActivityRecord \(activity.name) startTime: \(startTime) endTime: \(endTime) node\(node)")
         let record = ActivityRecord();
         record.activity = activity
         record.startTime = startTime
@@ -204,7 +249,14 @@ class DatabaseModel: NSObject {
         return true
     }
     
-    static func getAllRecords() -> Results<ActivityRecord> {
-        return realm.objects(ActivityRecord.self).sorted(byKeyPath: "startTime",ascending: false)
+    static func getActivityRecords(from startDate: Date?, to endDate: Date?) -> Results<ActivityRecord> {
+        var records = realm.objects(ActivityRecord.self).sorted(byKeyPath: "startTime",ascending: false)
+        if let startDate = filterModel.startDate {
+            records = records.filter("startTime >= %@ OR endTime > %@", startDate, startDate)
+        }
+        if let endDate = filterModel.endDate {
+            records = records.filter("endTime <= %@ OR startTime < %@", endDate, endDate)
+        }
+        return records
     }
 }
