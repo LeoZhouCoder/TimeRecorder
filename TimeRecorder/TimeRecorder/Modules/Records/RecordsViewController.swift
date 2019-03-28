@@ -46,7 +46,7 @@ class RecordsViewController: BasicItemsTableViewController, EditRecordViewProtoc
         
         self.tableView!.register(RecordListTableViewCell.self, forCellReuseIdentifier: "RecordCell")
         
-        records = DatabaseModel.getAllRecords()
+        /*records = DatabaseModel.getActivityRecords(from: nil, to: nil, ascending: true)
         
         let activity = DatabaseModel.getAllActivities()[1]
         
@@ -55,7 +55,7 @@ class RecordsViewController: BasicItemsTableViewController, EditRecordViewProtoc
                                       activities: [activity],
                                       note: nil)
         let result = Records.getRecords(filterModel: filterModel)
-        print(result)
+        print(result)*/
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

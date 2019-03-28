@@ -15,9 +15,9 @@ enum IconType: Int {
 
 class Icon: Object {
     @objc dynamic var id = UUID().uuidString
-    @objc dynamic var type = 0
-    @objc dynamic var name = ""
-    @objc dynamic var image = Data()
+    @objc dynamic var type: Int = 0
+    @objc dynamic var name: String = ""
+    @objc dynamic var image: Data = Data()
     
     override static func primaryKey() -> String? {
         return "id"
@@ -26,7 +26,7 @@ class Icon: Object {
 
 class ActivityCategory: Object {
     @objc dynamic var id = UUID().uuidString
-    @objc dynamic var name = ""
+    @objc dynamic var name: String = ""
     @objc dynamic var icon: Icon?
     
     let activities = List<Activity>()
@@ -38,7 +38,7 @@ class ActivityCategory: Object {
 
 class Activity: Object {
     @objc dynamic var id = UUID().uuidString
-    @objc dynamic var name = ""
+    @objc dynamic var name: String = ""
     @objc dynamic var icon: Icon?
     @objc dynamic var category: ActivityCategory?
     
@@ -53,9 +53,9 @@ class Activity: Object {
 
 class ActivityRecord: Object {
     @objc dynamic var id = UUID().uuidString
-    @objc dynamic var startTime = Date()
-    @objc dynamic var endTime = Date()
-    @objc dynamic var node = ""
+    @objc dynamic var startTime: Date = Date()
+    @objc dynamic var endTime: Date?
+    @objc dynamic var node: String?
     @objc dynamic var activity:Activity?
     
     let linkToActivity = LinkingObjects(fromType: Activity.self, property: "records")
@@ -123,7 +123,7 @@ class DatabaseModel: NSObject {
     }
     
     static func getDefaultIcon() -> Icon {
-        return getAllIcons()[0]
+        return getIcons()[0]
     }
     
     static func getIcons() -> Results<Icon> {
@@ -194,7 +194,10 @@ class DatabaseModel: NSObject {
         return true
     }
     
-    static func updateActivity(_ item:Activity, _ name:String, _ icon: Icon, _ category:ActivityCategory) ->Bool {
+    static func updateActivity(_ item:Activity,
+                               _ name:String,
+                               _ icon: Icon,
+                               _ category:ActivityCategory) ->Bool {
         try! realm.write {
             item.name = name
             item.icon = icon
@@ -220,7 +223,7 @@ class DatabaseModel: NSObject {
         record.activity = activity
         record.startTime = startTime
         record.endTime = endTime
-        record.tag = node
+        record.node = node
         try! realm.write {
             activity.records.append(record)
         }
@@ -236,7 +239,7 @@ class DatabaseModel: NSObject {
             record.activity = activity
             record.startTime = startTime
             record.endTime = endTime
-            record.tag = node
+            record.node = node
             realm.add(record, update: true)
         }
         return true
@@ -249,14 +252,57 @@ class DatabaseModel: NSObject {
         return true
     }
     
-    static func getActivityRecords(from startDate: Date?, to endDate: Date?) -> Results<ActivityRecord> {
-        var records = realm.objects(ActivityRecord.self).sorted(byKeyPath: "startTime",ascending: false)
-        if let startDate = filterModel.startDate {
+    static func getActivityRecords(from startDate: Date?,
+                                   to endDate: Date?,
+                                   _ ascending:Bool = true) -> Results<ActivityRecord> {
+        var records = realm.objects(ActivityRecord.self).sorted(byKeyPath: "startTime",ascending: ascending)
+        if let startDate = startDate {
             records = records.filter("startTime >= %@ OR endTime > %@", startDate, startDate)
         }
-        if let endDate = filterModel.endDate {
+        if let endDate = endDate {
             records = records.filter("endTime <= %@ OR startTime < %@", endDate, endDate)
         }
         return records
     }
+    
+    static func getActivityRecordsFillEmptyTime(from startDate: Date?,
+                                                to endDate: Date?) -> [ActivityRecord] {
+        /*var records = getActivityRecords(from: startDate, to: endDate, true)
+        
+        var date = startDate
+        var record: ActivityRecord*/
+        let recordArr = [ActivityRecord]()
+        /*
+         var date = startDate
+         
+         while records.count > 0 {
+         
+         var record  =  records.pop first one
+         if record.startTime != date {
+            new record startTime = date endTime = record.startTime
+            push to arr
+         }
+         if record.endTime == nil {
+            record.endTime = endDate
+         }
+         push record to arr
+         date = record.endTime
+         
+         }
+         
+         
+         
+         */
+        
+    
+        
+        /*while records.count > 0 {
+            //record = records.
+        }
+        for record in records {
+            
+        }*/
+        return recordArr
+    }
+    
 }

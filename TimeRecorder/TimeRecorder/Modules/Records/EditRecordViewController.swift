@@ -55,8 +55,8 @@ class EditRecordViewController: BaseEditAttributeTableViewController, UITextFiel
             model = EditRecordModel(editType: EditRecordType.modify,
                                     activity: currentRecord.activity!,
                                     startDate: currentRecord.startTime,
-                                    endDate: currentRecord.endTime,
-                                    node: currentRecord.tag,
+                                    endDate: currentRecord.endTime!,
+                                    node: currentRecord.node,
                                     record: currentRecord)
         }else{
             model = EditRecordModel(editType: EditRecordType.new,

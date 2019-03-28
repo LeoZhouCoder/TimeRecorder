@@ -18,7 +18,7 @@ class CategoriesViewController: BasicItemsTableViewController, EditActivityViewP
         
         self.tableView!.register(ActivityTableViewCell.self, forCellReuseIdentifier: "ActivityCell")
         
-        categories = DatabaseModel.getAllActivityCategory()
+        categories = DatabaseModel.getActivityCategories()
     }
     
     override func tappedAddButton() {

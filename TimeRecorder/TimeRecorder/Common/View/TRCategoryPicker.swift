@@ -31,7 +31,7 @@ class TRCategoryPicker: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         //self.backgroundColor = UIColor.white
         self.delegate = delegate
         
-        categories = DatabaseModel.getAllActivityCategory()
+        categories = DatabaseModel.getActivityCategories()
         
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         closeButton.layer.cornerRadius = 2

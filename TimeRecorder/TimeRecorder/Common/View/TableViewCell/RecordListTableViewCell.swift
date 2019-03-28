@@ -25,11 +25,11 @@ class RecordListTableViewCell: UITableViewCell {
         didSet {
             let format = "HH:mm:ss"
             startDateText.text = record?.startTime.toString(format: format)
-            endDateText.text = record?.endTime.toString(format: format)
+            endDateText.text = record?.endTime!.toString(format: format)
             activityView.icon = record?.activity?.icon
             activityView.name = record?.activity?.name
-            costTimeText.text = record?.endTime.subtracted(earlierDate: record!.startTime, format: format)
-            nodeText.text = record?.tag
+            costTimeText.text = record?.endTime!.subtracted(earlierDate: record!.startTime, format: format)
+            nodeText.text = record?.node
         }
     }
     

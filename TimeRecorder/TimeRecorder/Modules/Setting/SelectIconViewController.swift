@@ -36,7 +36,7 @@ class SelectIconViewController: UIViewController, UICollectionViewDelegate, UICo
         self.title = "Select Icon"
         let screenSize = UIScreen.main.bounds.size
         
-        icons = DatabaseModel.getAllIcons()
+        icons = DatabaseModel.getIcons()
         
         let layout = UICollectionViewFlowLayout()
         let space: CGFloat = 5
