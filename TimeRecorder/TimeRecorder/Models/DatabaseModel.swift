@@ -70,22 +70,32 @@ class DatabaseModel: NSObject {
     
     static let iconImages = ["IconWork", "IconHome", "IconFun"]
     
-    // how to use realm safely
     static var realm: Realm {
-        return try! Realm()
+        do {
+            return try Realm()
+        }catch {
+            fatalError("Can't get Realm. Error: \(error)")
+        }
     }
     
-    static func initDatabase() {
-        // completely delete the Realm file
-        //try! FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
-        
-        // completely empty the database
-        /*try! realm.write {
-            realm.deleteAll()
-        }*/
-        
+    static func initDatabase(reset: Bool = false) {
+        if reset {
+            deleteRealm()
+        }
         updateSystemIcons()
         print(realm.configuration.fileURL ?? "")
+    }
+    
+    static func deleteRealm() {
+        let realmFileURL = Realm.Configuration.defaultConfiguration.fileURL
+        guard realmFileURL != nil else { return }
+        let fileManager = FileManager.default
+        guard fileManager.fileExists(atPath: realmFileURL!.absoluteString) else { return }
+        do {
+            try fileManager.removeItem(at: realmFileURL!)
+        }catch{
+            fatalError("Delete Realm file failed. Error: \(error)")
+        }
     }
     
     static func updateSystemIcons() {
