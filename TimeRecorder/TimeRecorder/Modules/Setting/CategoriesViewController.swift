@@ -18,7 +18,7 @@ class CategoriesViewController: BasicItemsTableViewController, EditActivityViewP
         
         self.tableView!.register(ActivityTableViewCell.self, forCellReuseIdentifier: "ActivityCell")
         
-        categories = DatabaseModel.getActivityCategories()
+        categories = DataManager.shareManager.getActivityCategories()
     }
     
     override func tappedAddButton() {
@@ -64,10 +64,7 @@ class CategoriesViewController: BasicItemsTableViewController, EditActivityViewP
                 self.present(alertController,animated: true)
                 
             }else{
-                let result = DatabaseModel.deleteActivityCategory(category)
-                if !result {
-                    fatalError("delete ActivityCategory error")
-                }
+                DataManager.shareManager.deleteActivityCategory(category: category)
                 self.tableView?.reloadData()
             }
         }
@@ -84,15 +81,9 @@ class CategoriesViewController: BasicItemsTableViewController, EditActivityViewP
         switch editActivityModel.type {
         case EditableActivityType.edit:
             let category = editActivityModel.object as! ActivityCategory
-            let result = DatabaseModel.updateActivityCategory(category, editActivityModel.name, editActivityModel.icon)
-            if !result {
-                fatalError("updateActivityCategory error")
-            }
+            DataManager.shareManager.updateActivityCategory(category: category, name: editActivityModel.name, icon: editActivityModel.icon)
         case EditableActivityType.new:
-            let result = DatabaseModel.addActivityCategory(editActivityModel.name, editActivityModel.icon)
-            if !result {
-                fatalError("addActivityCategory error")
-            }
+            DataManager.shareManager.addActivityCategory(name: editActivityModel.name, icon: editActivityModel.icon)
         }
         self.tableView?.reloadData()
     }

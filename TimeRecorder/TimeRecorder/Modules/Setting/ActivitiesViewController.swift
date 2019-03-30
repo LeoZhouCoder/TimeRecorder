@@ -61,10 +61,7 @@ class ActivitiesViewController: BasicItemsTableViewController, EditActivityViewP
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let activity = activities![indexPath.row]
-            let result = DatabaseModel.deleteActivity(activity)
-            if !result {
-                fatalError("delete Activity error")
-            }
+            DataManager.shareManager.deleteActivity(activity: activity)
             self.tableView?.reloadData()
         }
     }
@@ -73,15 +70,9 @@ class ActivitiesViewController: BasicItemsTableViewController, EditActivityViewP
         switch editActivityModel.type {
         case EditableActivityType.edit:
             let activity = editActivityModel.object as! Activity
-            let result = DatabaseModel.updateActivity(activity, editActivityModel.name, editActivityModel.icon, category)
-            if !result {
-                fatalError("updateActivityCategory error")
-            }
+            DataManager.shareManager.updateActivity(activity: activity, name: editActivityModel.name, icon: editActivityModel.icon, category: category)
         case EditableActivityType.new:
-            let result = DatabaseModel.addActivity(editActivityModel.name, editActivityModel.icon, category)
-            if !result {
-                fatalError("addActivityCategory error")
-            }
+            DataManager.shareManager.addActivity(name: editActivityModel.name, icon: editActivityModel.icon, category: category)
         }
         activities = category.activities
         self.tableView?.reloadData()

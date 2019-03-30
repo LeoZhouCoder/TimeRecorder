@@ -83,10 +83,7 @@ class RecordsViewController: BasicItemsTableViewController, EditRecordViewProtoc
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let record = records![indexPath.row]
-            let result = DatabaseModel.deleteActivityRecord(record: record)
-            if !result {
-                fatalError("delete ActivityCategory error")
-            }
+            DataManager.shareManager.deleteActivityRecord(record: record)
             self.tableView?.reloadData()
         }
     }
@@ -94,22 +91,16 @@ class RecordsViewController: BasicItemsTableViewController, EditRecordViewProtoc
     func didEditRecord(editRecordModel:EditRecordModel) {
         switch editRecordModel.editType {
         case EditRecordType.modify:
-            let result = DatabaseModel.updateActivityRecord(record: editRecordModel.record!,
+            DataManager.shareManager.updateActivityRecord(record: editRecordModel.record!,
                                                activity: editRecordModel.activity,
                                                startTime: editRecordModel.startDate,
                                                endTime: editRecordModel.endDate,
                                                node: editRecordModel.node!)
-            if !result {
-                fatalError("updateActivityCategory error")
-            }
         case EditRecordType.new:
-            let result = DatabaseModel.addActivityRecord(activity: editRecordModel.activity,
+            DataManager.shareManager.addActivityRecord(activity: editRecordModel.activity,
                                             startTime: editRecordModel.startDate,
                                             endTime: editRecordModel.endDate,
                                             node: editRecordModel.node!)
-            if !result {
-                fatalError("addActivityCategory error")
-            }
         }
         self.tableView?.reloadData()
     }

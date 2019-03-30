@@ -26,7 +26,7 @@ struct EditActivityModel {
     
     static func getNewActivityModel() -> EditActivityModel {
         let model = EditActivityModel(name: "",
-                                      icon: DatabaseModel.getDefaultIcon(),
+                                      icon: DataManager.shareManager.defaultIcon!,
                                       type: EditableActivityType.new,
                                       object: nil)
         return model

@@ -60,7 +60,7 @@ class EditRecordViewController: BaseEditAttributeTableViewController, UITextFiel
                                     record: currentRecord)
         }else{
             model = EditRecordModel(editType: EditRecordType.new,
-                                    activity: DatabaseModel.getAllActivities()[0],
+                                    activity: DataManager.shareManager.defaultActivity!,
                                     startDate: Date(),
                                     endDate: Date(),
                                     node: "",

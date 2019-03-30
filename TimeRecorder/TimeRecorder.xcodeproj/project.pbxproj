@@ -54,7 +54,7 @@
 		5667FD4D2245EA59002617BE /* RecordListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD4C2245EA59002617BE /* RecordListTableViewCell.swift */; };
 		5667FD4F22460046002617BE /* Common+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD4E22460046002617BE /* Common+Extensions.swift */; };
 		5667FD5122461CB5002617BE /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD5022461CB5002617BE /* Date+Extensions.swift */; };
-		5682D2B022387E6D00B2B96F /* DatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */; };
+		5682D2B022387E6D00B2B96F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682D2AF22387E6D00B2B96F /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,7 +141,7 @@
 		5667FD4C2245EA59002617BE /* RecordListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListTableViewCell.swift; sourceTree = "<group>"; };
 		5667FD4E22460046002617BE /* Common+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Common+Extensions.swift"; sourceTree = "<group>"; };
 		5667FD5022461CB5002617BE /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
-		5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseModel.swift; sourceTree = "<group>"; };
+		5682D2AF22387E6D00B2B96F /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,7 +347,7 @@
 		5682D2AE22387E0B00B2B96F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5682D2AF22387E6D00B2B96F /* DatabaseModel.swift */,
+				5682D2AF22387E6D00B2B96F /* DataManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -508,7 +508,7 @@
 				5667FCA62240FEB3002617BE /* BasicItemsTableViewController.swift in Sources */,
 				5667FC492239A108002617BE /* CategoriesViewController.swift in Sources */,
 				5667FC9B223F48E9002617BE /* ActivitiesViewController.swift in Sources */,
-				5682D2B022387E6D00B2B96F /* DatabaseModel.swift in Sources */,
+				5682D2B022387E6D00B2B96F /* DataManager.swift in Sources */,
 				5667FD3D22438AF3002617BE /* BaseEditAttributeTableViewController.swift in Sources */,
 				5667FD442244F68D002617BE /* EditNoteTableViewCell.swift in Sources */,
 				5667FC9E223F955D002617BE /* CategoriesFilteViewController.swift in Sources */,
