@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import SwiftyJSON
 
 enum IconType: Int {
     case system, coutomize
@@ -69,7 +70,50 @@ class DataManager: NSObject {
     
     static let shareManager = DataManager(reset: false)
     
-    private let systemIconImages = ["IconWork", "IconHome", "IconFun"]
+    private let systemIconImages = ["IconWork",
+                                    "IconHome",
+                                    "IconFun",
+                                    "IconChildcare",
+                                    "IconDinner",
+                                    "IconEating",
+                                    "IconFitness",
+                                    "IconPerson",
+                                    "IconReading",
+                                    "IconRunning",
+                                    "IconShopping",
+                                    "IconShowering",
+                                    "IconSleep",
+                                    "IconStudy",
+                                    "IconTime",
+                                    "IconTV",
+                                    "IconWriting",
+                                    "TabChats",
+                                    "TabRecords",
+                                    "TabSetting",
+                                    "TabTimer",
+                                    "IconCafe"]
+    
+    private let defaultCategories = [
+        "Biological Needs" :
+            ["icon" : "IconPerson",
+             "activities" : ["Sleeping" : "IconSleep",
+                             "Showering" : "IconShowering",
+                             "Eating" : "IconEating",
+                             "Exercise" : "IconRunning"]],
+        "Working" :
+            ["icon" : "IconWork",
+             "activities" : ["Project 1" : "IconWork",
+                             "Project 2" : "IconWork"]],
+        "Studying" :
+            ["icon" : "IconStudy",
+             "activities" : ["Reading" : "IconReading",
+                             "Writing" : "IconWriting"]],
+        "Rest" :
+            ["icon" : "IconCafe",
+             "activities" : ["Games" : "IconFun",
+                             "Cafe" : "IconCafe",
+                             "Watching TV" : "IconTV"]]
+    ]
     
     private var realm: Realm {
         do {
@@ -84,10 +128,14 @@ class DataManager: NSObject {
     
     init(reset: Bool = false) {
         super.init()
+        print("DataManager \(reset)")
         if reset {
             deleteRealm()
         }
         updateSystemIcons()
+        if reset {
+            initBasicCategoriesAndActivities()
+        }
         print(realm.configuration.fileURL ?? "")
     }
     
@@ -113,9 +161,9 @@ class DataManager: NSObject {
     
     private func deleteRealm() {
         let realmFileURL = Realm.Configuration.defaultConfiguration.fileURL
+        print(realmFileURL!)
         guard realmFileURL != nil else { return }
         let fileManager = FileManager.default
-        guard fileManager.fileExists(atPath: realmFileURL!.absoluteString) else { return }
         do {
             try fileManager.removeItem(at: realmFileURL!)
         }catch{
@@ -177,6 +225,34 @@ class DataManager: NSObject {
         }
     }
     
+    private func initBasicCategoriesAndActivities() {
+        let categories = JSON.init(defaultCategories)
+        var icon: Icon?
+        var currentCategory: ActivityCategory
+        for (key, category) in categories {
+            icon = getIcon(by: category["icon"].stringValue)
+            if let categoryIcon = icon {
+                currentCategory = addActivityCategory(name: key, icon: categoryIcon)
+            }else{
+                fatalError("Default category \(key) can't find system icon: \(category["icon"].stringValue)")
+            }
+            let activities = category["activities"]
+            for (subKey, iconName) in activities {
+                icon = getIcon(by: iconName.stringValue)
+                if let activityIcon = icon {
+                    addActivity(name: subKey, icon: activityIcon, category: currentCategory)
+                }else{
+                    fatalError("Default activity \(subKey) can't find system icon: \(iconName)")
+                }
+            }
+        }
+    }
+    
+    private func getIcon(by name: String) -> Icon? {
+        let icons = realm.objects(Icon.self).filter("name == %@", name)
+        return icons.count == 0 ? nil : icons[0]
+    }
+    
     func getIcons() -> Results<Icon> {
         return realm.objects(Icon.self).sorted(byKeyPath: "type")
     }
@@ -198,11 +274,12 @@ class DataManager: NSObject {
         return icon
     }
     
-    func addActivityCategory(name:String, icon: Icon) {
+    func addActivityCategory(name:String, icon: Icon) -> ActivityCategory {
         let category = ActivityCategory()
         category.name = name
         category.icon = icon
         realmAdd(object: category)
+        return category
     }
     
     func getActivityCategories() -> Results<ActivityCategory> {
@@ -239,7 +316,14 @@ class DataManager: NSObject {
         activity.name = name
         activity.icon = icon
         activity.category = category
-        realmAdd(object: activity)
+        
+        do {
+            try realm.write {
+                category.activities.append(activity)
+            }
+        }catch {
+            fatalError("Realm add activity: \(activity) error: \(error)")
+        }
     }
     
     func updateActivity(activity: Activity,
@@ -280,6 +364,14 @@ class DataManager: NSObject {
         record.endTime = endTime
         record.node = node
         realmAdd(object: record)
+        
+        do {
+            try realm.write {
+                activity.records.append(record)
+            }
+        }catch {
+            fatalError("Realm add record: \(record) error: \(error)")
+        }
     }
     
     func updateActivityRecord(record: ActivityRecord,
