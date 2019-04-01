@@ -9,7 +9,7 @@
 import UIKit
 
 class BasicTableView: UITableView {
-    private let defaultPlaceHoderImage = "hg_default-no_results"
+    private let defaultPlaceHoderImage = "hg_default-error"
     private let defaultPlaceHoderTitle = "No results founds"
     private let defaultPlaceHoderSubtitle = "We can't find what you're looking for."
     
@@ -94,7 +94,7 @@ class BasicTableView: UITableView {
             
             placeHolderContainer.heightAnchor.constraint(equalToConstant: placeHolderImageView.height + placeHolderTitleTextField.height + placeHolderSubtitleTextField.height),
             placeHolderContainer.widthAnchor.constraint(equalTo: placeHolderView.widthAnchor),
-            placeHolderContainer.centerYAnchor.constraint(equalTo: placeHolderView.centerYAnchor),
+            placeHolderContainer.centerYAnchor.constraint(equalTo: placeHolderView.centerYAnchor, constant: -80),
             placeHolderContainer.centerXAnchor.constraint(equalTo: placeHolderView.centerXAnchor),
             
             placeHolderImageView.centerXAnchor.constraint(equalTo: placeHolderContainer.centerXAnchor),

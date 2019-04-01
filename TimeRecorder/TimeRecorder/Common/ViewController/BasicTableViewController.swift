@@ -16,7 +16,6 @@ class BasicTableViewController: UIViewController, UITableViewDelegate, UITableVi
     init(title: String, showTabBar: Bool) {
         super.init(nibName: nil, bundle: nil)
         self.title = title
-        // UITableView+Extensions
         self.showTabBar = showTabBar
     }
     required init?(coder aDecoder: NSCoder) {
