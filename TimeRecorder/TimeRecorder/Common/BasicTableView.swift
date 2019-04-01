@@ -15,12 +15,14 @@ class BasicTableView: UITableView {
     
     private var placeHolderView: UIView = {
         let view = UIView(frame: .zero)
+        //view.backgroundColor = UIColor.red
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private var placeHolderContainer: UIView = {
         let view = UIView(frame: .zero)
+        //view.backgroundColor = UIColor.blue
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -75,7 +77,6 @@ class BasicTableView: UITableView {
     }
     
     private func showPlaceHoler() {
-        
         placeHolderImageView.image = placeHoderImage ?? UIImage(named: defaultPlaceHoderImage)
         placeHolderTitleTextField.text = placeHoderTitle ?? defaultPlaceHoderTitle
         placeHolderSubtitleTextField.text = placeHoderSubtitle ?? defaultPlaceHoderSubtitle
@@ -85,17 +86,21 @@ class BasicTableView: UITableView {
         placeHolderContainer.addSubview(placeHolderImageView)
         placeHolderContainer.addSubview(placeHolderTitleTextField)
         placeHolderContainer.addSubview(placeHolderSubtitleTextField)
-        
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         NSLayoutConstraint.activate([
-            placeHolderView.heightAnchor.constraint(equalTo: self.heightAnchor),
-            placeHolderView.widthAnchor.constraint(equalTo: self.widthAnchor),
-            placeHolderView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            placeHolderView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            placeHolderView.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.heightAnchor),
+            placeHolderView.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor),
+            placeHolderView.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor),
+            placeHolderView.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             
             placeHolderContainer.heightAnchor.constraint(equalToConstant: placeHolderImageView.height + placeHolderTitleTextField.height + placeHolderSubtitleTextField.height),
-            placeHolderContainer.widthAnchor.constraint(equalTo: placeHolderView.widthAnchor),
+            placeHolderContainer.widthAnchor.constraint(equalTo: placeHolderView.safeAreaLayoutGuide.widthAnchor),
             placeHolderContainer.centerYAnchor.constraint(equalTo: placeHolderView.centerYAnchor, constant: -80),
-            placeHolderContainer.centerXAnchor.constraint(equalTo: placeHolderView.centerXAnchor),
+            //placeHolderContainer.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor),
+            placeHolderContainer.centerXAnchor.constraint(equalTo: placeHolderView.safeAreaLayoutGuide.centerXAnchor),
             
             placeHolderImageView.centerXAnchor.constraint(equalTo: placeHolderContainer.centerXAnchor),
             placeHolderImageView.topAnchor.constraint(equalTo: placeHolderContainer.topAnchor),

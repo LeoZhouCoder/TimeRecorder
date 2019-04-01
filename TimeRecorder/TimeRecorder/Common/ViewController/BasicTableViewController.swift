@@ -40,7 +40,7 @@ class BasicTableViewController: UIViewController, UITableViewDelegate, UITableVi
             tableViewHeight = tableViewHeight - self.tabBarController!.tabBar.height
         }
         let tableView = BasicTableView(
-            frame: CGRect(x: 0, y: 0, width: screenSize.width,height: tableViewHeight),
+            frame: .zero,
             style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
@@ -48,8 +48,20 @@ class BasicTableViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.separatorStyle = .singleLine
         tableView.allowsSelection = true
         tableView.allowsMultipleSelection = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
         self.tableView = tableView
         self.view.addSubview(tableView)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        NSLayoutConstraint.activate([
+            tableView!.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor),
+            tableView!.heightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.heightAnchor),
+            tableView!.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
+            tableView!.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
+            ])
     }
     
     @objc func back() {
