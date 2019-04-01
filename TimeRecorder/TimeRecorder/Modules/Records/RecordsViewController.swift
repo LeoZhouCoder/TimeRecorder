@@ -46,16 +46,7 @@ class RecordsViewController: BasicItemsTableViewController, EditRecordViewProtoc
         
         self.tableView!.register(RecordListTableViewCell.self, forCellReuseIdentifier: "RecordCell")
         
-        /*records = DatabaseModel.getActivityRecords(from: nil, to: nil, ascending: true)
-        
-        let activity = DatabaseModel.getAllActivities()[1]
-        
-        let filterModel = FilterModel(startDate: Date.init(from: "2019-03-23 07:00", dateFormat: "yyyy-MM-dd HH:mm"),
-                                      endDate: Date.init(from: "2019-03-23 21:00", dateFormat: "yyyy-MM-dd HH:mm"),
-                                      activities: [activity],
-                                      note: nil)
-        let result = Records.getRecords(filterModel: filterModel)
-        print(result)*/
+        records = DataManager.shareManager.getActivityRecords(from: nil, to: nil)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

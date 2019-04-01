@@ -128,7 +128,6 @@ class DataManager: NSObject {
     
     init(reset: Bool = false) {
         super.init()
-        print("DataManager \(reset)")
         if reset {
             deleteRealm()
         }
@@ -136,6 +135,7 @@ class DataManager: NSObject {
         if reset {
             initBasicCategoriesAndActivities()
         }
+        defaultActivity = getAllActivities()[0]
         print(realm.configuration.fileURL ?? "")
     }
     

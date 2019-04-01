@@ -10,12 +10,13 @@ import UIKit
 
 class BasicTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var tableView: UITableView?
+    var tableView: BasicTableView?
     var showTabBar: Bool = true
     
     init(title: String, showTabBar: Bool) {
         super.init(nibName: nil, bundle: nil)
         self.title = title
+        // UITableView+Extensions
         self.showTabBar = showTabBar
     }
     required init?(coder aDecoder: NSCoder) {
@@ -35,11 +36,11 @@ class BasicTableViewController: UIViewController, UITableViewDelegate, UITableVi
         self.navigationItem.backBarButtonItem = backButton
         
         let screenSize = UIScreen.main.bounds.size
-        var tableViewHeight = screenSize.height
+        var tableViewHeight = screenSize.height - self.navigationController!.navigationBar.height
         if showTabBar {
-            tableViewHeight = tableViewHeight - self.tabBarController!.tabBar.frame.height
+            tableViewHeight = tableViewHeight - self.tabBarController!.tabBar.height
         }
-        let tableView = UITableView(
+        let tableView = BasicTableView(
             frame: CGRect(x: 0, y: 0, width: screenSize.width,height: tableViewHeight),
             style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
