@@ -86,10 +86,7 @@ class BasicTableView: UITableView {
         placeHolderContainer.addSubview(placeHolderImageView)
         placeHolderContainer.addSubview(placeHolderTitleTextField)
         placeHolderContainer.addSubview(placeHolderSubtitleTextField)
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
+        
         NSLayoutConstraint.activate([
             placeHolderView.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.heightAnchor),
             placeHolderView.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor),

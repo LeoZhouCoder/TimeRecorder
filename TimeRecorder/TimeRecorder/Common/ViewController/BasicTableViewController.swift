@@ -34,11 +34,6 @@ class BasicTableViewController: UIViewController, UITableViewDelegate, UITableVi
             action: #selector(BasicTableViewController.back))
         self.navigationItem.backBarButtonItem = backButton
         
-        let screenSize = UIScreen.main.bounds.size
-        var tableViewHeight = screenSize.height - self.navigationController!.navigationBar.height
-        if showTabBar {
-            tableViewHeight = tableViewHeight - self.tabBarController!.tabBar.height
-        }
         let tableView = BasicTableView(
             frame: .zero,
             style: .grouped)
@@ -52,15 +47,12 @@ class BasicTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.tableView = tableView
         self.view.addSubview(tableView)
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+        
         NSLayoutConstraint.activate([
-            tableView!.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor),
-            tableView!.heightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.heightAnchor),
-            tableView!.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
-            tableView!.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
+            tableView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor),
+            tableView.heightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.heightAnchor),
+            tableView.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
+            tableView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
             ])
     }
     
