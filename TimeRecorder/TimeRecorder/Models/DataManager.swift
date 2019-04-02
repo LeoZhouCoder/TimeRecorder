@@ -415,4 +415,35 @@ class DataManager: NSObject {
         }
         return records
     }
+    
+    func getSortedActivityRecords(from startDate: Date, to endDate: Date) -> [ActivityRecord]? {
+        guard endDate > startDate else {
+            return nil
+        }
+        let records = getActivityRecords(from: startDate, to: endDate, true)
+        var sortedRecords: [ActivityRecord] = []
+        var now = Date()
+        var record: ActivityRecord
+        var index = 0
+        while now > startDate {
+            record = records[index]
+            if record.endTime != nil {
+                sortedRecords.append(createEmptyActivityRecord(startTime: record.endTime!, endTime: now))
+            }
+            sortedRecords.append(record)
+            index += 1
+            now = record.startTime
+        }
+        return sortedRecords
+    }
+    
+    private func createEmptyActivityRecord(startTime: Date, endTime: Date) -> ActivityRecord
+    {
+        let record = ActivityRecord();
+        record.activity = nil
+        record.startTime = startTime
+        record.endTime = endTime
+        record.node = nil
+        return record
+    }
 }
