@@ -180,9 +180,28 @@ extension Date {
         return subtractedDate.toString(format: format)
     }
     
+    public func yesterday() -> (startTime: Date, endTime: Date) {
+        let endTime = self.midnight
+        let startTime = endTime - 24 * 60 * 60
+        return (startTime, endTime)
+    }
+    
     public func today() -> (startTime: Date, endTime: Date) {
         let startTime = self.midnight
         let endTime = startTime + 24 * 60 * 60
+        return (startTime, endTime)
+    }
+    
+    public func tomorrow() -> (startTime: Date, endTime: Date) {
+        let startTime = self.midnight + 24 * 60 * 60
+        let endTime = startTime + 24 * 60 * 60
+        return (startTime, endTime)
+    }
+    
+    public func lastWeek(from weekday: Weekday) -> (startTime: Date, endTime: Date) {
+        let weekday = (calendar.component(.weekday, from: self) + 7 - weekday.rawValue) % 7
+        let startTime = self.midnight - TimeInterval((weekday + 7) * 24 * 60 * 60)
+        let endTime = startTime + 7 * 24 * 60 * 60
         return (startTime, endTime)
     }
     
@@ -190,6 +209,32 @@ extension Date {
         let weekday = (calendar.component(.weekday, from: self) + 7 - weekday.rawValue) % 7
         let startTime = self.midnight - TimeInterval(weekday * 24 * 60 * 60)
         let endTime = startTime + 7 * 24 * 60 * 60
+        return (startTime, endTime)
+    }
+    
+    public func nextWeek(from weekday: Weekday) -> (startTime: Date, endTime: Date) {
+        let weekday = (calendar.component(.weekday, from: self) + 7 - weekday.rawValue) % 7
+        let startTime = self.midnight - TimeInterval((weekday - 7) * 24 * 60 * 60)
+        let endTime = startTime + 7 * 24 * 60 * 60
+        return (startTime, endTime)
+    }
+    
+    public func lastMonth()-> (startTime: Date, endTime: Date) {
+        var sm = 0
+        var sy = 0
+        if month == 0 {
+            sm = 12
+            sy = year - 1
+        }else{
+            sm = month - 1
+            sy = year
+        }
+        let startTime = Date(calendar: calendar, timeZone: timeZone, era: era,
+                             year: sy, month: sm, day: 1,
+                             hour: 0, minute: 0, second: 0, nanosecond: 0)
+        let endTime = Date(calendar: calendar, timeZone: timeZone, era: era,
+                           year: year, month: month, day: 1,
+                           hour: 0, minute: 0, second: 0, nanosecond: 0)
         return (startTime, endTime)
     }
     
