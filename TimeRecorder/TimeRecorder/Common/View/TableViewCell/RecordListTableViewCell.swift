@@ -26,8 +26,8 @@ class RecordListTableViewCell: UITableViewCell {
             let format = "HH:mm:ss"
             startDateText.text = record?.startTime.toString(format: format)
             endDateText.text = record?.endTime!.toString(format: format)
-            activityView.icon = record?.activity?.icon
-            activityView.name = record?.activity?.name
+            //activityView.icon = record?.activity?.icon
+            //activityView.name = record?.activity?.name
             costTimeText.text = record?.endTime!.subtracted(earlierDate: record!.startTime, format: format)
             nodeText.text = record?.node
         }
@@ -39,26 +39,38 @@ class RecordListTableViewCell: UITableViewCell {
         return view
     }()
     
-    var activityView: CategoryView = {
-        let activityView = CategoryView(frame: .zero)
-        activityView.translatesAutoresizingMaskIntoConstraints = false
-        return activityView
-    }()
-    
+    var dayText: UITextField = getBaseTextField(textColor: UIColor.lightGray, fontSize: 10)
+    var weekdayText: UITextField = getBaseTextField(textColor: UIColor.lightGray, fontSize: 10)
     var startDateText: UITextField = getBaseTextField(textColor: UIColor.lightGray, fontSize: 10)
     
     var linkText: UITextField = {
         let textField = getBaseTextField(textColor: UIColor.lightGray, fontSize: 10)
-        textField.text = "To"
+        textField.text = ""
         textField.textAlignment = .center
         return textField
     }()
     
     var endDateText: UITextField = getBaseTextField(textColor: UIColor.lightGray, fontSize: 10)
     
-    var costTimeText: UITextField = getBaseTextField(textColor: UIColor.blue)
+    var icon: IconView = {
+        var iconView = IconView(frame: .zero)
+        iconView.translatesAutoresizingMaskIntoConstraints = false
+        return iconView
+    }()
+    
+    var nameText: UITextField = {
+        var textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.isUserInteractionEnabled = false
+        textField.textColor = UIColor.black
+        return textField
+    }()
     
     var nodeText: UITextField = getBaseTextField(textColor: UIColor.lightGray)
+    
+    var costTimeText: UITextField = getBaseTextField(textColor: UIColor.systemBlue)
+    
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -67,11 +79,8 @@ class RecordListTableViewCell: UITableViewCell {
         container.addSubview(startDateText)
         container.addSubview(linkText)
         container.addSubview(endDateText)
-        container.addSubview(activityView)
         container.addSubview(costTimeText)
-        //costTimeText.backgroundColor = UIColor.red
         container.addSubview(nodeText)
-        //nodeText.backgroundColor = UIColor.gray
         
         NSLayoutConstraint.activate([
             container.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -40),
@@ -94,14 +103,9 @@ class RecordListTableViewCell: UITableViewCell {
             endDateText.leftAnchor.constraint(equalTo: startDateText.leftAnchor),
             endDateText.bottomAnchor.constraint(equalTo: container.bottomAnchor),
             
-            activityView.widthAnchor.constraint(equalToConstant: 100),
-            activityView.heightAnchor.constraint(equalTo: container.heightAnchor, multiplier: 0.8),
-            activityView.centerYAnchor.constraint(equalTo: container.centerYAnchor),
-            activityView.leftAnchor.constraint(equalTo: startDateText.rightAnchor, constant: 10),
-            
             costTimeText.widthAnchor.constraint(equalToConstant: 70),
             costTimeText.heightAnchor.constraint(equalTo: container.heightAnchor, multiplier: 0.6),
-            costTimeText.leftAnchor.constraint(equalTo: activityView.rightAnchor, constant: 10),
+            costTimeText.rightAnchor.constraint(equalTo: container.rightAnchor, constant: 10),
             costTimeText.centerYAnchor.constraint(equalTo: container.centerYAnchor),
             
             nodeText.leftAnchor.constraint(equalTo: costTimeText.rightAnchor, constant: 10),

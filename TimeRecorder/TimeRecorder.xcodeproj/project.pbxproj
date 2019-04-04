@@ -55,6 +55,7 @@
 		5667FD4F22460046002617BE /* Common+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD4E22460046002617BE /* Common+Extensions.swift */; };
 		5667FD5122461CB5002617BE /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667FD5022461CB5002617BE /* Date+Extensions.swift */; };
 		5682D2B022387E6D00B2B96F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682D2AF22387E6D00B2B96F /* DataManager.swift */; };
+		569D6433225561360040E561 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D6432225561360040E561 /* UIColor+Extensions.swift */; };
 		56E4BBAC2250C5DF00DF3A40 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E4BBAB2250C5DF00DF3A40 /* UIView+Extensions.swift */; };
 		56E4BBAE2250C7C600DF3A40 /* BasicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E4BBAD2250C7C600DF3A40 /* BasicTableView.swift */; };
 /* End PBXBuildFile section */
@@ -144,6 +145,7 @@
 		5667FD4E22460046002617BE /* Common+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Common+Extensions.swift"; sourceTree = "<group>"; };
 		5667FD5022461CB5002617BE /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		5682D2AF22387E6D00B2B96F /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		569D6432225561360040E561 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		56E4BBAB2250C5DF00DF3A40 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		56E4BBAD2250C7C600DF3A40 /* BasicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -346,6 +348,7 @@
 				5667FD4E22460046002617BE /* Common+Extensions.swift */,
 				5667FD5022461CB5002617BE /* Date+Extensions.swift */,
 				56E4BBAB2250C5DF00DF3A40 /* UIView+Extensions.swift */,
+				569D6432225561360040E561 /* UIColor+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				5667FC9B223F48E9002617BE /* ActivitiesViewController.swift in Sources */,
 				5682D2B022387E6D00B2B96F /* DataManager.swift in Sources */,
 				5667FD3D22438AF3002617BE /* BaseEditAttributeTableViewController.swift in Sources */,
+				569D6433225561360040E561 /* UIColor+Extensions.swift in Sources */,
 				5667FD442244F68D002617BE /* EditNoteTableViewCell.swift in Sources */,
 				5667FC9E223F955D002617BE /* CategoriesFilteViewController.swift in Sources */,
 				5667FC97223F20BF002617BE /* EditActivityIconTableViewCell.swift in Sources */,
